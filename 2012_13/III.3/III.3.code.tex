@@ -1,0 +1,39 @@
+\documentclass{beamer}
+\usepackage{listings}
+\lstset{language=C}
+
+\begin{document}
+
+\subsection*{III.3 Sorting - radix sort.}
+\begin{frame}[fragile]{Radix sort 1 - preamble}
+\begin{lstlisting}[numbers=left]
+void radix_sort(int a[], int n, int a_bound)
+{
+
+  int exp_max=log10((double)a_bound)+1;
+  int a_sort[n];
+  int i,exp;
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Radix sort 2 - loop}
+\begin{lstlisting}[numbers=left,firstnumber=7]
+  for(exp=0;exp<exp_max;exp++)
+    {
+      int buckets[10]={0};
+      int digit=pow(10,exp);
+      for(i=0;i<n;i++)
+        buckets[a[i]/digit%10]++;
+      for(i=1;i<10;i++)
+        buckets[i]+=buckets[i-1];
+      for(i=n-1;i>=0;i--)
+        {
+          buckets[a[i]/digit%10]--;
+          a_sort[buckets[a[i]/digit%10]]=a[i];
+        }
+      for(i=0;i<n;i++)
+        a[i]=a_sort[i];
+    }
+}
+\end{lstlisting}
+\end{frame}
+\end{document}

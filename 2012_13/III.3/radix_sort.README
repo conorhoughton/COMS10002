@@ -1,0 +1,12 @@
+This program uses the maths package math.h, this includes the log10
+function used to calculated the number of significant figures and the
+pow for working out the exponent. The corresponding .o file needs to
+be linked at compile time, in gcc this is done using -lm by writing
+
+gcc radix_sort.c -o radix -lm
+
+There are other ways of doing this, for example by running the loop
+until digit exceeds a_bound.
+
+CONSIDER ADDING THIS MODIFICATION YOURSELF, MAKE IT SO THAT math.h
+ISN'T NEEDED.

@@ -1,0 +1,117 @@
+I.1: Sorting - insertion sort.
+
+ I.1.insert_sort_timing.eps
+ I.1.insert_sort_timing.tex
+ I.1.tex
+ insert_sort.c
+ insert_sort.README
+ insert_sort_timing_better.c
+ insert_sort_timing_better.README
+ insert_sort_timing_better.txt
+ insert_sort_timing.c
+ insert_sort_timing.README
+ insert_sort_timing.txt
+
+I.2: Big Oh notation.
+
+ binary_search.c
+ find_largest.c
+ I.2.code.pdf
+ I.2.code.tex
+ I.2.exp.eps
+ I.2.exp.tex
+ I.2.log.eps
+ I.2.log.tex
+ I.2.short.pdf
+ I.2.tex
+ linear_search.c
+
+I.3: A quick note on an n! algorithm.
+
+ I.3.tex
+ travelling_sales.eps
+ travelling_sales.svg
+
+II.1: An introduction to recursion.
+
+ binary_search_recursive.c
+ factorial.c
+ II.1.code.pdf
+ II.1.code.tex
+ II.1.short.pdf
+ II.1.tex
+
+II.2:  The interesting example of the Fibonacci sequence.
+
+ fib_length.io
+ fib_length.README
+ fib_length.txt
+ fib_loop.c
+ fib_recursion.c
+ fib_recursion_no_termination.c
+ fib_tail_recursion.c
+ II.2.code.pdf
+ II.2.code.tex
+ II.2.fib_length.eps
+ II.2.fib_length.tex
+ II.2.short.pdf
+ II.2.tex
+
+III.1: Sorting - bubble sort and quicksort.
+
+ bubble_sort_better.c
+ bubble_sort_better.README
+ bubble_sort.c
+ III.1.code.pdf
+ III.1.code.tex
+ III.1.short.pdf
+ III.1.tex
+ quicksort.c
+ quicksort.README
+
+III.2: Sorting - merge sort.
+
+ III.2.code.pdf
+ III.2.code.tex
+ III.2.short.pdf
+ III.2.tex
+ merge_sort.c
+
+III.3: Sorting - radix sort.
+
+ III.3.code.pdf
+ III.3.code.tex
+ III.3.short.pdf
+ III.3.tex
+ radix_sort_better.c
+ radix_sort.c
+ radix_sort.README
+
+IV.1: Data structures - linked lists.
+
+ IV.1.code.pdf
+ IV.1.code.tex
+ IV.1.short.pdf
+ IV.1.tex
+ linked_list.c
+ linked_list.README
+
+IV.2: Data structures - binary trees.
+
+ binary_tree.c
+ binary_tree.README
+ IV.2.code.pdf
+ IV.2.code.tex
+ IV.2.tex
+
+IV.3: Data structures - AVL trees.
+
+ AVL_tree.c
+ IV.3.code.pdf
+ IV.3.code.tex
+ IV.3.tex
+ latex_print.README
+
+
+
+
