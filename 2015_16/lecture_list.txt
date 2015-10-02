@@ -1,0 +1,6 @@
+
+1. lecture 1 (2015-10-2) introduction, discussion of insert sort,
+line-by-line estimate of run time. O(n^2) mentioned. Based on
+1_introduction pages 1-5.
+
+
