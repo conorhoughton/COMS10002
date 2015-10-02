@@ -11,6 +11,7 @@
 \usepackage{graphicx}
 \usepackage{pstricks}
 \usepackage{listings}
+\usepackage{color}
 \lstset{language=C}
 \pagestyle{headings}
 \markright{COMS10002 - PandA1 1\_introduction - Conor}
@@ -181,6 +182,7 @@ is really of interest is the power of the highest power of $n$ and
 detailed calculations like this won't be done again.
 
 \begin{table}
+\color{darkgray}
 So there is formula for summing all the numbers from one to $n$:
 \begin{equation}
 \sum_{i=1}^ni = \frac{n(n+1)}{2}
@@ -191,6 +193,7 @@ This can be proved by induction. If $n=1$ it holds with one on each side of the 
 \end{equation}
 proving the formula by induction.
 \caption{Mathematical aside: the formula for adding numbers. \label{math_sum_of_digits}}
+\color{black}
 \end{table}
 
 Now we can calculate $T(n)$ for the worst case.
