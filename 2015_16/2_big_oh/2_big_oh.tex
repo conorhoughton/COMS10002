@@ -32,7 +32,7 @@ are saying that $T(n)$ is one of these functions, its large $n$
 behavior is, at worst, like $n^2$. 
 
 Specifically, the definition of $O(g(n)$, called \lq{}big oh\rq{} of
-$g(n)$ is
+$g(n)$, is
 \begin{equation}
 O(g(n))=\{f(n)| \exists n_0>0\in {\bf N}\mbox{ and }c>0\in {\bf R}\mbox{ with }|f(n)|\le c|g(n)|\,\forall n\ge n_0\}
 \end{equation}
@@ -45,7 +45,7 @@ where $f(n)$ has the property on the right of the $|$. Now,
 \lq{}$\exists$\rq{} means \lq{}there exists\rq{} and
 \lq{}$\forall$\rq{} means \lq{}for all\rq{}, so the defining property
 says it is possible to find a positive natural number $n_0$ and a
-positive real number $c$ for that if you choose a value of $n$ at
+positive real number $c$ so that if you choose a value of $n$ at
 least as big as $n_0$ then $f(n)$ is no bigger than $cg(n)$, ${\bf N}$
 and ${\bf R}$ stand for the natural and real numbers. Notice the
 absolute value signs, this is about $|f(n)|$ and $|g(n)|$, in fact,
@@ -233,7 +233,7 @@ $n!$      &1   &2&24&$2.1\times 10^{13}$&$3.85\times 10^{305}$&$5.4\times10^{236
 the $2^n$ calculations and\\ {\tt
   http://www.calculatorsoup.com/calculators/discretemathematics/factorials.php}\\ for
 the $n!$ calculations; these give answers even when the answer is very
-large.
+large. Another easy way to calculate with large numbers is to use Python.
 
 \caption{Different values of $n$ for some functions.  \label{table_n_values}
 }
@@ -280,15 +280,13 @@ called a heap, is used to keep track of which element is largest.
 \begin{lstlisting}[numbers=left]
 int search(int a[],int n)
 {
+   int i;
+   int best_val=a[0];
 
-  int i;
-  int best_val=a[0];
-
-  for(i=1;i<n;i++)
-    {
+   for(i=1;i<n;i++){
       if(a[i]>best_val)
-	best_val= a[i];
-    }
+         best_val= a[i];
+   }
 
   return best_val;
 }
