@@ -139,14 +139,14 @@ void sort(int a[],int n)
 \end{table}
 
 Lets examine the run time for the function in
-Table~\ref{c_insertsort}. The amount of time each line takes to run is
-platform dependent, so lets say the run time for the $i$th line is
-$t_i$:
+Table~\ref{c_insertsort}. Let $n$ be the number of elements in the
+list. The amount of time each line takes to run is platform dependent,
+so lets say the run time for the $i$th line is $t_i$:
 \begin{equation}
 t_i=\mbox{time it takes line }i\mbox{ to run once}
 \end{equation}
-Lets call the total run time $T(n)$ since it depends on the
-amount of elements that need sorting and the contribution to $T(n)$ of
+Lets call the total run time $T(n)$ since it depends on $n$, the
+number of elements that need sorting and the contribution to $T(n)$ of
 the $i$th line $T_i$, 
 \begin{equation}
 T_i=\mbox{the total time the program spends on line }i
