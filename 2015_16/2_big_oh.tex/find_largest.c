@@ -1,3 +1,13 @@
+//find_largest.c
+//a program to search for the largest element in an unsorted list
+//related to 2_big_oh
+//2015 Conor Houghton conor.houghton@bristol.ac.uk
+
+//To the extent possible under law, the author has dedicated all copyright 
+//and related and neighboring rights to this software to the public domain 
+//worldwide. This software is distributed without any warranty. 
+
+
 #include<stdio.h>
 
 int search(int a[],int n);
@@ -23,6 +33,7 @@ int main()
   return 0;
 }
 
+//returns the largest value in a[]
 int search(int a[],int n)
 {
 
