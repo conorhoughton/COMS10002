@@ -1,6 +1,12 @@
 
-1. lecture 1 (2015-10-2) introduction, discussion of insert sort,
+1. lecture 1 (2015-10-02) introduction, discussion of insert sort,
 line-by-line estimate of run time. O(n^2) mentioned. Based on
 1_introduction pages 1-5.
+
+2. lecture 2 (2015-10-07) recap of insert sort, definition of O(g(n))
+with some examples. Discussion of log_2 n, of n! and 2^n. Searching an
+ordered list, linear search, binary search. Binary search is O(log
+n). Based on 2_big_oh and 3_search.
+
 
 
