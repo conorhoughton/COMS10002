@@ -1,3 +1,12 @@
+//binary_search_recursive.c
+//a program to demonstrate recursive binary search on a sorted list
+//related to 3_search
+//2015 Conor Houghton conor.houghton@bristol.ac.uk
+
+//To the extent possible under law, the author has dedicated all copyright 
+//and related and neighboring rights to this software to the public domain 
+//worldwide. This software is distributed without any warranty. 
+
 #include<stdio.h>
 
 void sort(int a[], int n);
@@ -39,6 +48,7 @@ int main()
   return 0;
 }
 
+//sorts the list ready for binary searching
 void sort(int a[],int n)
 {
 
@@ -60,12 +70,14 @@ void sort(int a[],int n)
 
 }
 
-
+//wrapper for calling the recursive function
+//needed since the recursive function needs high and low in the arguments
 int search(int a[],int n, int val)
 {
   return search_recursion(a,n,val,0,n-1);
 }
  
+//recursive binary search function
 int search_recursion(int a[],int n, int val,int low,int high)
 {
 
