@@ -1,0 +1,45 @@
+%5_master.tex
+%notes for the course PandA1 COMS10002 taught at the University of Bristol
+%2015 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+\lstset{language=C}
+\pagestyle{headings}
+\markright{COMS10002 - PandA1 5\_master - Conor}
+\begin{document}
+
+\subsection*{5 The Master Theorem}
+
+The master method is an approach to solving recurrences of the form
+\begin{equation}
+T(n)=aT(n/b)+f(n)
+\end{equation}
+where $a\ge 1$ and $b\ge 1$ and $f(n)$ is some function which is
+positive for large enough $n$. This applies to a problem which the
+recursion requires the solution of $a$ sub-problems of size $n/b$. In
+the case of binary search for example, the problem required the
+solution of just one $n/2$ sized problem, so $a=1$ and $b=2$. The
+$f(n)$ measures the extra work required to solve the size $n$ problem
+when the $a$ size $n/b$ problems have been solved. In the binary
+search example the size of this part of the problem didn't depend on
+$n$ so $f(n)=c$ for some constant, or put another way, $f(n)\in O(1)$.
+
+The master theorem tells us how the big-oh complexity of $T(n)$ if the large $n$ behavior of $f(n)$ satisfies some conditions which depend on $a$ and $b$. 
+\begin{enumerate}
+\item If $f(n) \in O(n^c)$ for $c<\log_ba$ then $T(n) \in O(n^{log_ba})$
+\item If $f(n) \in \Theta(n^c)$ for $c=\log_ba$ then $T(n) \in O(n^c\log n)$
+\end{enumerate}
+This isn't quite all, there is one more case we won't consider here
+and, in fact, we can replace the big-ohs with big-thetas in the sets
+$T(n)$ belong to, but we won't worry about that here.
+
+\end{document}
