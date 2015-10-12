@@ -19,6 +19,10 @@
 
 \subsection*{5 The Master Theorem}
 
+This section is about the master equation; it is based on the
+treatment in Introduction to Algorithms by Cormen, Leiserson, Rivest
+and Stein which is considered the authority on this subject.
+
 The master method is an approach to solving recurrences of the form
 \begin{equation}
 T(n)=aT(n/b)+f(n)
@@ -35,11 +39,65 @@ $n$ so $f(n)=c$ for some constant, or put another way, $f(n)\in O(1)$.
 
 The master theorem tells us how the big-oh complexity of $T(n)$ if the large $n$ behavior of $f(n)$ satisfies some conditions which depend on $a$ and $b$. 
 \begin{enumerate}
-\item If $f(n) \in O(n^c)$ for $c<\log_ba$ then $T(n) \in O(n^{log_ba})$
-\item If $f(n) \in \Theta(n^c)$ for $c=\log_ba$ then $T(n) \in O(n^c\log n)$
+\item If $f(n) \in O(n^c)$ for $c<\log_ba$ then $T(n) \in \Theta(n^{log_ba})$
+\item If $f(n) \in \Theta(n^c)$ for $c=\log_ba$ then $T(n) \in Theta(n^c\log n)$
+\item If $f(n) \in \Omega(n^c)$ for $c>\log_ba$ then, provided some other conditions on $f(n)$ hold then $T(n)\in \Theta(f(n))$ 
 \end{enumerate}
-This isn't quite all, there is one more case we won't consider here
-and, in fact, we can replace the big-ohs with big-thetas in the sets
-$T(n)$ belong to, but we won't worry about that here.
+Obviously we haven't stated the third posibility fully and, indeed, we
+won't be proving the master theorem. Furthermore, the master formula
+gives us a big-theta complexity for $T(n)$, we usually concentrate in
+this course on big-oh complexity so we will largely ignore this
+benefit of the master theorem. Finally, we haven't worried about the
+fact that $n/b$ may not be an integer, in practise in divide and
+conquer algorithms $n/b$ gets rounded up or down to the nearest
+integer. We saw this in case of binary search and, in fact, it doesn't
+make any difference to the theorem.
+
+Roughly speaking the large $n$ behaviour of the recursion
+\begin{equation}
+T(n)=aT(n/b)+f(n)
+\end{equation}
+is either dominated by the $aT(n/b)$ term or the $f(n)$ term depending
+on how fast $f(n)$ grows. This is what gives the first and third
+cases; in the first case $f(n)$ grows slowly enough to allow the first
+term to dominate the behaviour, in the third case $f(n)$ grows so fast
+it takes control. The second case is a kind of in-between case.
+
+Lets consider the binary search case we looked at before. In that case
+$a=1$ and $b=2$ so $\log_ba=\log_2 1=0$. We also know $f(n)=1\in \Theta(1)$
+so $c=0$. This means the second case applies and the master theorem
+says the $T(n)\in O(\log n)$ which is what we worked out.
+
+We will have the opportunity to see the master equation in action
+again and it is a standard well-used tool in the study of
+algorithms. Here we will just look at some more artificial examples
+where we consider some recursion relations without examining any
+algorithm they might have come from. 
+
+Now say
+\begin{equation}
+T(n)=9T(n/3)+n.
+\end{equation}
+Here $a=9$, $b=3$ and $f(n)=n$, so $f(n)\in O(n)$ and $\log_ba=2>1$. This means the first case applies and
+\begin{equation}
+T(n)\in \Theta(n^2)
+\end{equation}
+If, instead
+\begin{equation}
+T(n)=5T(n/4)+n
+\end{equation}
+we have $a=5$, $b=4$ and $f(n)=n\in O(n)$. Now $\log_ba=\log_45\approx 1.16>1$ so we are again in the first case and, approximately 
+\begin{equation}
+T(n)\in \Theta(n^{1.16})
+\end{equation}
+Finally say we have
+\begin{equation}
+T(n)=4T(n/2)+n^2
+\end{equation}
+we have $\log_ba=2$ and $f(n)\in \Theta(n^2)$ so
+\begin{equation}
+T(n)\in \Theta(n^2\log n)
+\end{equation}
+
 
 \end{document}
