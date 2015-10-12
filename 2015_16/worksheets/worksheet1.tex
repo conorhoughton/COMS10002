@@ -42,16 +42,14 @@ and 5 are the extension questions.
   using the standard long multiplication method.
 \item What is the big-oh complexity of calculating $x^n$ of a single
   digit number?
-\item What is the big-oh complexity of calculating $x^n$ of an $m$
-  digit number?
 \end{enumerate}
 
 
 \item This question is about estimating the algorithmic complexity of
-  evaluating a polynomial. Here consider fixed sized variables, so
-  multiplication and addition take roughly one step, irrespective of
-  how many digits the number has. Once again, powers are calculated by
-  multiplication.
+  evaluating a polynomial or multiplying matrices. Here consider fixed
+  sized variables, so multiplication and addition take roughly one
+  step, irrespective of how many digits the number has. Once again,
+  powers are calculated by multiplication.
 
 \begin{enumerate}
 \item What is the big-oh complexity of evaluating, that is finding the
@@ -67,6 +65,20 @@ $$ b_{n-2}=a_{n-2}+x_0 b_{n-1}$$
 right down to 
 $$ b_0=a_0+x_0b_1$$ and $b_0=p(x_0)$ is the answer. What is the big-oh
 complexity?
+\item A matrix is an algebraic object with two indices, in a square
+  matrix the indices both have the same range, say one to $n$. We
+  write $A=[a_{ij}]$ where $A$ is the matrix and $a_{ij}$ are the
+  components. The multiple of two matrices is given by
+$$C=AB$$
+where the components $c_{ij}$ of $C$ are given by
+$$
+c_{ij}=sum_{k}a_{ik}b_{kj}
+$$ with $A=[a_{ij}]$ and $B=[b_{ij}$. What is the big-oh complexity of
+  matrix multiplication.
+
+
+
+
 \end{enumerate}
 
 \item This question is intended to help you practice counting
@@ -81,7 +93,10 @@ complexity?
   contains. Assuming there are 18 letters and $n$ or fewer words, how
   many names are there.
 
-\item Consider another arithmetic operation, or a different algorithm for one of the operations above, describe it and estimate the big-oh complexity. Examples might be long division or the peasant algorithm for multiplication.
+\item Consider another arithmetic operation, or a different algorithm
+  for one of the operations above, describe it and estimate the big-oh
+  complexity. Examples might be long division or the power of an $m$
+  digit number or the peasant algorithm for multiplication.
 
 \item Consider some other non-sorting algorithm, describe it and
   estimate the big-oh complexity. Examples might be the Tower of Hanoi
