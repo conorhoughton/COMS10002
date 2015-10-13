@@ -148,11 +148,12 @@ acts as a shorthand for something that does. Now $O(g(n))$ is a set of
 functions whose large $n$ behavior is bounded by $g(n)$ so in
 algorithms, being in $O(g(n))$ is a property of $T(n)$, the formula
 for the running time of the algorithm. However, it is a standard abuse
-of notation to say an algorithm is $O(g(n))$ for some $g(n)$ is
+of notation to say an algorithm is $O(g(n))$ for some $g(n)$ if
 $T(n)\in O(g(n))$ for all cases. This is another way of saying that
 the worst behavior of the algorithm isn't any worse than the behavior
 of $g(n)$ for large $n$ so all possible $T(n)$ are elements of
-$O(g(n))$.
+$O(g(n))$. Finding $O(g(n))$ for an algorithm will be refered to as
+\lq{}finding the big-oh complexity\rq{}. In the context of a more precise approach to the topic we might talk about \lq{}finding the asymptotic complexity\rq{}.
 
 \begin{table}
 \color{darkgray}
@@ -254,7 +255,7 @@ number theorist use a slightly different one. Either way, it isn't
 used very often in computer science because algorithms are very
 frequently $\Omega(1)$; in the best case scenario the problem is in
 some sense already solve, the array already sorted for example, and
-the algorithm finishs in one step. 
+the algorithm finishes in one step. 
 
 There is also a set of function that are both bounded above and below
 by the same $g(n)$
