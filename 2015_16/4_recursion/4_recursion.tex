@@ -77,7 +77,7 @@ int factorial(int n)
 }
 
 \end{lstlisting}
-\caption{The recursive function for calculating $n!=n(n-1)\ldots 1$. If n<2 it returns 1, giving a terminating condition, it also means $0!=1$ which is a normal mathematical convention, otherwise it calls factorial(n-1). If you trying using this function, note that for even modest values of n, n! is too big to fit into int.\label{c_factorial}}
+\caption{The recursive function for calculating $n!=n(n-1)\ldots 1$. If $n<2$ it returns 1, giving a terminating condition, it also means $0!=1$ which is a normal mathematical convention, otherwise it calls factorial(n-1). If you trying using this function, note that for even modest values of n, n! is too big to fit into int.\label{c_factorial}}
 \end{table}
 
 
@@ -100,9 +100,9 @@ if (a)
 else 
    ans=c;
 \end{lstlisting}
-\caption{The ternary operator ans = a \& b : c evaluates a and then
+\caption{The ternary operator ans = a ? b : c evaluates a and then
   does either sets ans=b or ans=c depending on whether a is true of
-  false.  Thus ans=a \& b : c is equivalent to the code above. Ternary
+  false.  Thus ans=a ? b : c is equivalent to the code above. Ternary
   operators are often faster to execute than the corresponding if
   statement.\label{c_ternary}}
 \end{table}
@@ -141,7 +141,7 @@ int factorial(int n)
 }
 \end{lstlisting}
 \caption{The tail recursive function for calculating $n!=n(n-1)\ldots
-  1$. If n<2 it returns big\_n, otherwise it calls
+  1$. If $n<2$ it returns big\_n, otherwise it calls
   factorial(n-1,n*big\_n). Since nothing happens to the
   factorial(n-1,n*big\_n) before it is itself returned, this is an
   example of tail recursion.\label{c_factorial_tail}}
