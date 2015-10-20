@@ -1,4 +1,4 @@
-//binary_search_recursive.c
+//factorial.c
 //a program to demonstrate different factorial programs
 //related to 3_search
 //2015 Conor Houghton conor.houghton@bristol.ac.uk
