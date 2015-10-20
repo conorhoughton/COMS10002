@@ -1,0 +1,17 @@
+\frametitle {Fibonacci using a loop}\begin {lstlisting}[numbers=left]
+int fib(int n)
+{
+  if(n<2)
+     return n;
+
+  int last=1, old_last=0;
+  int i;
+
+  for(i=2;i<=n;i++){
+        int temp=last;
+        last=last+old_last;
+        old_last=temp;
+  }
+  return last;
+}
+\end{lstlisting}
