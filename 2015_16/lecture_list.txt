@@ -8,5 +8,13 @@ with some examples. Discussion of log_2 n, of n! and 2^n. Searching an
 ordered list, linear search, binary search. Binary search is O(log
 n). Based on 2_big_oh and 3_search.
 
+3. lecture 3 (2015-10-14) Recap of big-Oh. Discussion of recursion,
+including tail recursion and the stack. Based on 4_recursion.
 
+4. lecture 4 (2015-10-21) recursion again, discussion and examples of calculating the run time. Telescoping and ansatze for solving recursion relations; start of the master theorem. Based on 4_recursion and 5_master.
+
+5. lecture 5 (2015-10-28) the master theorem again, some examples. The
+Fibonacci sequence, solution, run time. Sorting: discussion of the
+memory use for insert sort. Fire alarm. Based on 5_mast and
+6_fibonacci, very start of 7_quicksort.
 
