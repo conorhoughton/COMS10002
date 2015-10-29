@@ -1,0 +1,96 @@
+%worksheet2.tex
+%problem set for the course PandA1 COMS10002 taught at the University of Bristol
+%2015-10-29 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\pagestyle{headings}
+\markright{COMS10002 - PandA1 algorithms worksheet 2 - Conor}
+\begin{document}
+
+\subsection*{Algorithms Worksheet 2}
+
+DRAFT!
+
+This worksheet contains mostly pen and paper calculations. The
+solutions should be submitted as plain text, files in other formats,
+like .doc or .pdf will not be accepted. You can write $x^\wedge n$ and
+$a\_n$ for $x^n$ and $a_n$. Where applicable, write a short
+description of how the answer is obtained. The graph in part 6 should
+be submitted as an eps file.
+
+\begin{enumerate}
+
+\item [15 marks] This question is about solving recursion relations using
+  telescoping. In each case find the value of $T(n)$ by
+  telescoping. Check your answer by substitution, it is permisseable
+  to combine these two steps by using telescoping to come up with an
+  ansatz and then substituting it fix values in the ansatz. Write down
+  the big-Theta for the solution.
+
+\begin{enumerate}
+\item $T(n)=T(n-1)+3$ with $T(0)=1$
+\item $T(n)=T(n-1)+3$ with $T(1)=1$
+\item $T(n)=T(n-1)+3n$ with $T(1)=1$
+\item $T(n)=2T(n-1)+3$ with $T(0)=1$
+\item $T(n)=3T(n-1)+2$ with $T(0)=1$
+\end{enumerate}
+
+\item [20 marks] this question is about the asymptotic behavior of different functions, in each case give big-Theta for $T(n)$; if $T(n)$ was the worst case run-time this would give big-Oh. There is no need to give any working for this problem.
+
+\begin{enumerate}
+
+\item $T(n)=n^5+\frac{1}{n}+n(n-1)(n+2)^4$
+\item $T(n)=n^2\log{n}+n^3$
+\item $T(n)=2^n+n!$
+\item $T(n)=\sum_{i=0}^ni$
+\item $T(n)=\sqrt{n}n+n$
+\item $T(n)=\frac{n^2}{\log{n}}+n$
+\item $T(n)=\frac{n^5+345n^4+36n}{n^2+2n+1}$
+\item $T(n)=\frac{1}{n^2+2n+1}$
+\item $T(n)=\frac{(n+1)(n+2)(n+3)}{(n+4)(n+5)}$
+\item $T(n)=\frac{n!}{(n-1)!}$
+
+\end{enumerate}
+
+\item [10 marks] Solve for $T(n)$ using the ansatz $T(n)=r^n$ for the following
+  two step recursion relations. Solving for $r$ will give two values
+  $r_1$ and $r_2$, this means that general solution will be
+  $T(n)=Ar_1^n+Br_2^n$. Use the two base values to find $A$ and $B$.
+
+\begin{enumerate}
+\item $T(n)=T(n-1)+3T(n-2)$ with $T(0)=0$ and $T(1)=5$.
+\item $T(n)=T(n-2)$ with $T(0)=0$ and $T(1)=2$.
+\end{enumerate}
+
+\item [15 marks] This question is about the master theorem. Use it to calculate big-Theta for $T(n)$ in each case
+
+\begin{enumerate}
+\item $T(n)= 25T(n/5)+4n^2$
+\item $T(n)= 20T(n/5)+4n$
+\item $T(n)= 16T(n/2)+2n^4$
+\end{equation}
+
+\item [20 marks] For one of the folr based algorithms, you looked at
+  in last week's Haskell work sheet, work out the asymptotic
+  complexity.
+
+\item [20 marks] In the section 1\_introduction the actual run time
+  for insert sort was plotted against the size of the set. Using
+  another algorithm whose asypmtotic behavior you know, make a similar
+  plot. I use \texttt{gnuplot} to do plots and instructions for this
+  are provided in the 1\_introduction folder.
+
+
+
+\end{document}
