@@ -169,7 +169,7 @@ where $c$ is a constant representing the computational time required
 for factorial(n) itself, the if statement, the multiplication and so
 on. Now we can expand it out
 \begin{equation}
-T(n)=c+[c+T(n-2)=2c+T(n-2)
+T(n)=c+T(n-1)=c+[c+T(n-2)]=2c+T(n-2)
 \end{equation}
 and this keeps going
 \begin{equation}
@@ -244,7 +244,7 @@ int find_r(int a[],int n, int val,int low,int high)
   halting conditions, val is found, or high<low, meaning that val
   isn't an element of a. Note that, though each call works with a
   smaller and smaller number of elements, for convenience the same
-  array is used each time. This function is implemented in {\tt
+  array is used each time. This function is implemented in \texttt{
     binary\_search\_recursive}.\label{c_binary_search_recursive}}
 \end{table}
 
