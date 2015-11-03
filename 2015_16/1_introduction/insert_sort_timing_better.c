@@ -8,7 +8,7 @@
 //and related and neighboring rights to this software to the public domain 
 //worldwide. This software is distributed without any warranty. 
 
-
+//not better than insert_sort_timing.c
 
 #include<stdio.h>
 #include<time.h>
