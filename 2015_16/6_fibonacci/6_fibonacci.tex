@@ -123,7 +123,7 @@ int fib(int n)
 \begin{lstlisting}[numbers=left]
 int fib(int n)
 {
-  return (n < 2) & n : fib(n-1) + fib(n-2); 
+  return (n < 2) ? n : fib(n-1) + fib(n-2); 
 }
 \end{lstlisting}
 \caption{A fancier recursive function for calculating the Fibonacci Sequence. This uses the ternary operator. \label{c_fib_recursion_fancy}}
