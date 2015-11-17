@@ -13,7 +13,7 @@
 \usepackage{listings}
 \lstset{language=C}
 \pagestyle{headings}
-\markright{COMS10002 - PandA1 8\_mergesort - Conor}
+\markright{COMS10002 - PandA1 8\_merge\_sort - Conor}
 \begin{document}
 
 \subsection*{8 - merge sort}
@@ -38,7 +38,7 @@ going until one of the markers reaches the end of its list, when that
 happens all the remaining elements of the other array are added to the
 merged array. Code to do this is given in Table~\ref{c_merge}; in this
 code the two sorted arrays that need to be merged are consequitive
-subarrays marked by first to mid-1 and mid to last.
+subarrays marked by \texttt{first} to \texttt{mid-1} and \texttt{mid} to \texttt{last}.
 
 
 \begin{table}
@@ -139,7 +139,7 @@ void merge_sort_r(int a[], int merged_a[],int first, int last)
 8&$|$&5&$|$&3&$|$&4&$|$&2&$|$&6&$|$&1&$|$&7\\
 5&&8&$|$&3&&4&$|$&2&&6&$|$&1&&7\\
 3&&4&&5&&8&$|$&1&&2&&6&&7\\
-1&&2&&3&&4&&5&&6&$|$&7&&8
+1&&2&&3&&4&&5&&6&&7&&8
 \end{tabular}
 \caption{Merge sort in action. This represents the process of merge
   sorting, the vertical line represents the different subarrays. This
