@@ -19,17 +19,17 @@ void radix_sort(int a[], int n, int a_bound)
 \begin{lstlisting}[numbers=left,firstnumber=7]
   for(exp=0;exp<exp_max;exp++)
     {
-      int buckets[10]={0};
-      int digit=pow(10,exp);
-      for(i=0;i<n;i++)
-        buckets[a[i]/digit%10]++;
-      for(i=1;i<10;i++)
-        buckets[i]+=buckets[i-1];
-      for(i=n-1;i>=0;i--)
-        {
+      int buckets[10]={0},digit=pow(10,exp);
+
+      for(i=0;i<n;i++) buckets[a[i]/digit%10]++;
+
+      for(i=1;i<10;i++) buckets[i]+=buckets[i-1];
+
+      for(i=n-1;i>=0;i--){
           buckets[a[i]/digit%10]--;
           a_sort[buckets[a[i]/digit%10]]=a[i];
-        }
+      }
+
       for(i=0;i<n;i++)
         a[i]=a_sort[i];
     }

@@ -1,3 +1,14 @@
+//merge_sort_better.c
+//a program to calculate perform merge_sort
+//part of the PandA1 course at Bristol University
+//2015 Conor Houghton conor.houghton@bristol.ac.uk
+
+//To the extent possible under law, the author has dedicated all copyright 
+//and related and neighboring rights to this software to the public domain 
+//worldwide. This software is distributed without any warranty. 
+
+
+
 /*
 Here a maker keeps track of the elements that have few significant
 figures so they aren't sorted again.
