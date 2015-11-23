@@ -1,0 +1,28 @@
+There is an old ambiguity in how carriage returns are encoded in ascii.
+
+Basically the ascii control characters, things like \n and \t, were
+originally interpreted in how they were used to control a particular
+machine, the Teletype Model 33 ASR. This needed two characters to make
+a new line, \r which moved the print head back to the left and \n
+which advanced the paper one line, so lines end in \r\n, carriage
+return followed by line feed. When ascii was being incorporated into
+more modern operating systems this seemed cumbersome and so it was
+shortened to one character. Unfortunately, as you might guess, this
+wasn't done consistiently, *nix-like systems use \n, DOS-like systems
+used \r and Apple computers use either because they used to be
+DOS-like and then became *nix-like. Files prepared for the web or for
+email often use both together, old style.
+
+This is the case with a_portrait.txt. You can see this by typing
+
+od -c < a_portrait.txt
+
+which dumps it in ascii. If the \r's are a problem I have made a new
+file by doing
+
+tr -d '\r' < a_portrait.txt > a_portrait_new.txt
+
+which has the \r's removed. Feel free to use whichever version you
+want, depending on how you have done your program, the encoding of the
+end of line may make no difference. It is however likely that this
+silly ambiguity will crop up for you at some point.

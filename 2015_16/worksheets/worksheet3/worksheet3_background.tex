@@ -1,0 +1,116 @@
+%worksheet3_background.tex 
+%a note on hash tables as background for the worksheet 3
+%programming problem for the course PandA1 COMS10002
+%taught at the University of Bristol 2015-10-29 Conor Houghton
+%conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\pagestyle{headings}
+\markright{COMS10002 - PandA1 algorithms worksheet 3 - Conor}
+\begin{document}
+
+\subsection*{Algorithms Worksheet 3 background - hash tables}
+The aim of this problem sheet is to implement a hash table and compare
+its performance to a linked list. A hash table is a quick way to
+access stored data; it is a frequently used and invaluable way to
+store date. It can be used in a very general way but as a definite
+example we will consider a hash table which counts how many times
+words are used in a book. This example was also used in the Haskell
+course where a trie was used. The clever thing about a trie is that
+the word itself was used as a kind of instruction for how to get to
+the location storing how many times the word was used. This is very
+elegant, but not as generic as a hash table. A hash table does share
+some part of the trick though, it uses the word as an instruction for
+finding the storage location.
+
+In our problem we have a \textbf{key}, a word in our case, and a
+\textbf{bucket} which stores the information we want to associate with
+the key. In our case the bucket will hold the number of uses of the
+word. The idea behind a hash table is to store the buckets in an
+array, we will have to change this slightly, but imagine each bucket
+has an index, so, if the array was called \texttt{hash\_array}, there
+would be buckets located at \texttt{hash\_array[0]},
+\texttt{hash\_array[1]} and so on. The challenge is to go from the key
+to the correct index. The simplest strategy is to look in each bucket
+in turn and stopping when you find the correct one. This is clearly
+very slow, we will experiment with this in the exercise. Another
+strategy would be to make a big lookup table of all the indices and
+using the alphabetic structure of the keys to seach it using a binary
+search algorithm, this would be smart but it does rely on the keys
+having an ordering, they do here when the keys are words, but we want
+to solve the problem in a more general way.
+
+The answer is to find some way of working out the index from the key
+itself, in other words, a hash table starts with a map, called the
+\textbf{hashing function} which maps each key to an index:
+\begin{eqnarray}
+h:\mbox{keys}&\rightarrow&\mbox{indices}\\
+\mbox{key}&\mapsto&h(\mbox{key})
+\end{eqnarray}
+What might this hashing function look like, well that depends on the
+data, on the type of key, the performance constraints on the problem
+and the amount of data. An obvious example for words would be to
+convert the letters into numbers with \texttt{a} going to 0,
+\texttt{b} to 1 and so on and then adding the values so
+\begin{equation}
+h(\mbox{\lq{}elbow\rq{}})=4+11+1+14+22=52
+\end{equation}
+Obviously this scheme would have to be changed slightly if there were
+capitals or other letters, so, for example, ascii could be used. 
+
+The idea now is to have a big list \texttt{hash\_table} and in this
+table \texttt{hash\_table[52]} would store the bucket for 'elbow'. One
+immeadiate problem is that we might have some large words, like zizzerzazzerzuzz, a creature in the Dr Seuss universe;
+\begin{equation}
+h(\mbox{\lq{}zizzerzazzerzuzz\rq{}})=295
+\end{equation}
+Obviously if this index was unexpectedly high and \texttt{hash\_table}
+had less than 296 entries then this would be a problem. This problem
+could be solve by making sure the hash function had a predefined
+range, for example by using \texttt{mod} so
+\begin{equation}
+h(x)=\sum{(\mbox{value of letters in }x)}\% N
+\end{equation}
+where $N$ is the size of \texttt{hash\_table}.
+
+However, this discussion exposes a greater problem: 296 is not a big
+number compared to the number of words and if zizzerzazzerzuzz only
+has the hash value 295 there must be lots of words that share the same
+hash value. Obviously two words that are anagrams of each other have
+the same hash value under this scheme:
+\begin{equation}
+h(\mbox{\lq{}male\rq{}})=h(\mbox{\lq{}lame\rq{}})
+\end{equation}
+This situation can be improved by using a better hash function, the
+one I have described is terrible. An example hash function is given in
+\texttt{djb2.c}. However, although the number of \textbf{collisions},
+that is cases were
+\begin{equation}
+h(x_1)=h(x_2)
+\end{equation}
+when $x_1\not=x_2$, can be reduced, it is very hard to make sure it
+never happens; perfect hash function where there are no collisions
+are usually slow or impractical in other ways.
+
+The answer to this problem is to make \texttt{hash\_table} an array of
+linked lists instead of an array holding the buckets directly. Thus,
+when looking for the bucket with key $x$, you go to the linked list at
+\texttt{hash\_table[$h(x)$]} and then search down the linked list
+until the bucket for key $x$ is found. This approach, called
+\textbf{direct chaining} isn't the only way to deal with the problem
+of collisions, but it is one of the most straight forward.
+
+
+
+\end{document}
