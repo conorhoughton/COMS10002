@@ -34,22 +34,23 @@ elegant, but not as generic as a hash table. A hash table does share
 some part of the trick though, it uses the word as an instruction for
 finding the storage location.
 
-In our problem we have a \textbf{key}, a word in our case, and a
-\textbf{bucket} which stores the information we want to associate with
-the key. In our case the bucket will hold the number of uses of the
-word. The idea behind a hash table is to store the buckets in an
-array, we will have to change this slightly, but imagine each bucket
+In a hash table we have a \textbf{key}, a word in our case, and a
+\textbf{node} which stores the information we want to associate with
+the key. In our case the node will hold the number of uses of the word
+and, for reasons that will be clear later, the node will also store a
+copy of the key. The idea behind a hash table is to store the nodes in
+an array, we will have to change this slightly, but imagine each node
 has an index, so, if the array was called \texttt{hash\_array}, there
-would be buckets located at \texttt{hash\_array[0]},
+would be nodes located at \texttt{hash\_array[0]},
 \texttt{hash\_array[1]} and so on. The challenge is to go from the key
-to the correct index. The simplest strategy is to look in each bucket
-in turn and stopping when you find the correct one. This is clearly
-very slow, we will experiment with this in the exercise. Another
-strategy would be to make a big lookup table of all the indices and
-using the alphabetic structure of the keys to seach it using a binary
-search algorithm, this would be smart but it does rely on the keys
-having an ordering, they do here when the keys are words, but we want
-to solve the problem in a more general way.
+to the correct index. The simplest strategy is to look in each node in
+turn, stopping when you find the correct one. This is clearly very
+slow, we will experiment with this in the exercise. Another strategy
+would be to make a big lookup table of all the indices and to use the
+alphabetic structure of the keys to seach it using a binary search
+algorithm, this would be smart but it does rely on the keys having an
+ordering, they do here when the keys are words, but we want to solve
+the problem in a more general way.
 
 The answer is to find some way of working out the index from the key
 itself, in other words, a hash table starts with a map, called the
@@ -60,18 +61,19 @@ h:\mbox{keys}&\rightarrow&\mbox{indices}\\
 \end{eqnarray}
 What might this hashing function look like, well that depends on the
 data, on the type of key, the performance constraints on the problem
-and the amount of data. An obvious example for words would be to
-convert the letters into numbers with \texttt{a} going to 0,
-\texttt{b} to 1 and so on and then adding the values so
+and the amount of data. An obvious, though poor, example for words
+would be to convert the letters into numbers with \texttt{a} going to
+0, \texttt{b} to 1 and so on and then adding the values so
 \begin{equation}
 h(\mbox{\lq{}elbow\rq{}})=4+11+1+14+22=52
 \end{equation}
 Obviously this scheme would have to be changed slightly if there were
-capitals or other letters, so, for example, ascii could be used. 
+capitals or other letters, so, for example, ascii coeds could be used.
 
 The idea now is to have a big list \texttt{hash\_table} and in this
-table \texttt{hash\_table[52]} would store the bucket for 'elbow'. One
-immeadiate problem is that we might have some large words, like zizzerzazzerzuzz, a creature in the Dr Seuss universe;
+table \texttt{hash\_table[52]} would store the node for 'elbow'. One
+immeadiate problem is that we might have some large words, like
+zizzerzazzerzuzz, a creature in the Dr Seuss universe;
 \begin{equation}
 h(\mbox{\lq{}zizzerzazzerzuzz\rq{}})=295
 \end{equation}
@@ -93,9 +95,9 @@ the same hash value under this scheme:
 h(\mbox{\lq{}male\rq{}})=h(\mbox{\lq{}lame\rq{}})
 \end{equation}
 This situation can be improved by using a better hash function, the
-one I have described is terrible. An example hash function is given in
-\texttt{djb2.c}. However, although the number of \textbf{collisions},
-that is cases were
+one I have described is terrible. An better example hash function is
+given in \texttt{djb2.c}. However, although the number of
+\textbf{collisions}, that is cases were
 \begin{equation}
 h(x_1)=h(x_2)
 \end{equation}
@@ -104,13 +106,14 @@ never happens; perfect hash function where there are no collisions
 are usually slow or impractical in other ways.
 
 The answer to this problem is to make \texttt{hash\_table} an array of
-linked lists instead of an array holding the buckets directly. Thus,
-when looking for the bucket with key $x$, you go to the linked list at
+linked lists instead of an array holding the nodes directly. Thus,
+when looking for the node with key $x$, you go to the linked list at
 \texttt{hash\_table[$h(x)$]} and then search down the linked list
-until the bucket for key $x$ is found. This approach, called
-\textbf{direct chaining} isn't the only way to deal with the problem
+until the node for key $x$ is found. Of course, in fact,
+\texttt{hash\_table} will not be in fact an array of linked lists, the
+items in an array must be of fixed size, so it will be an array of
+pointers to the heads of linked lists. This approach, called
+\textbf{direct chaining}, isn't the only way to deal with the problem
 of collisions, but it is one of the most straight forward.
-
-
 
 \end{document}
