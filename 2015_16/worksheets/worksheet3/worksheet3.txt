@@ -84,7 +84,7 @@ maximum length of an overflow list.
 
 It should list the number of occurances of the words
 
-looking, me, epiphany, technique, falle,n seraphim, ardent, windless, esthetic, computer.
+looking, me, epiphany, seraphim, ardent, windless, esthetic, computer.
 
 in the text. It might also give the number of comparisons necessary to retrieve the words.
 
