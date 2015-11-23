@@ -9,7 +9,6 @@
 #include<math.h>
 #include<ctype.h>
 FILE* book;
-FILE* output;
 
 //a node in the linked list
 typedef struct List 
@@ -58,6 +57,7 @@ list *insert( char new_word[20], list *next_node)
 list *add(list *old_list, char new_word[20])
 {
 
+  //this is a special case when the head of the list is empty
   if(old_list==NULL)
     {
       return insert(new_word,NULL);
@@ -137,6 +137,11 @@ list *insertwordlist(list *a_list)
 
 int main(int argc,char *argv[])
 {
+
+  //this makes the head of the list 
+  //it starts off as a null pointer but gets
+  //updated when the first piece of data is added.
+
   list *linked_list;
   linked_list=NULL;
   
