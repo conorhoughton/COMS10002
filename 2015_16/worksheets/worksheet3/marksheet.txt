@@ -21,9 +21,14 @@ A:
             occurrences for the test keywords named on the assignment sheet.
             
    _  60%   A working program implementing the linked list approach and
-            the hash table approach. In addition to the other stuff
-            you have calculate the number of empty entries in the hash
-            table and the length of the longest list.
+            the hash table approach. In addition it give the size of
+            the hash table, the number of empty indexes, what
+            percentage of the hash table is used and
+            the maximum length of a linked list.
+
+   _  65%   A working program as described in 60%, but one which also works
+            out how many comparisons were required during retrieval using the 
+            linked list and using the hash table.
 
 Tick any of the following if appropriate:
 
@@ -31,7 +36,7 @@ B: _  10%   You have commented your code properly.  This means every
             function is clearly defined as an operation, an input and
             corresponding output set.
 
-C: _  10%   Your program has proper indentation. Indentation is
+C: _  5%   Your program has proper indentation. Indentation is
             consistent throughout your code, empty lines are used
 	    consistently. For example, either you use an empty line
 	    between every two functions, or you never have an empty line
@@ -42,9 +47,7 @@ D: _  10%   You have defined constants and types, and declared variables
 
 E: _  10%   You do not use global variables, and functions and loops
             are used properly. In particular, there is no duplicated
-	    code anywhere. If you have used a "COPY AND PASTE" feature
-	    of your editor, than it is likely that you have duplicated
-	    code, and that you cannot tick this box.
+	    code anywhere. 
  
          
 Provisional mark (Add marks A to E)
