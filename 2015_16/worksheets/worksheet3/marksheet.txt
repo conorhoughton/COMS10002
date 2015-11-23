@@ -20,14 +20,10 @@ A:
             hash table approach. Your program gives the right number of 
             occurrences for the test keywords named on the assignment sheet.
             
-   _  55%   A working program implementing the linked list approach and the
-            hash table approach. You have chosen the size of the hash table to
-	    suit the text. 
-
    _  60%   A working program implementing the linked list approach and
-            the hash table approach. You have implemented the hash
-            table as abstract data type (data structure and a set of
-            operations on it).
+            the hash table approach. In addition to the other stuff
+            you have calculate the number of empty entries in the hash
+            table and the length of the longest list.
 
 Tick any of the following if appropriate:
 
