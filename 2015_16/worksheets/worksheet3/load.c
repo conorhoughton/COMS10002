@@ -1,6 +1,18 @@
 /* this program wouldn't get full marks even it was complete, the
-   comments are terrible, the variables names poor and there are
-   global variables.*/
+   comments are poor, the variables names poor and there are
+   global variables.
+
+   this is not intended as exemplar code, just as code you might use
+   as a starting point, so you are welcome to reuse any part of it as
+   it is or to improve it or write something new, it is up to
+   you. this is supposed to replicate the real world experience of
+   code reuse where you face similar dilemmas. 
+
+
+
+*/
+
+
 
 #include<stdio.h>
 #include<stdlib.h>
