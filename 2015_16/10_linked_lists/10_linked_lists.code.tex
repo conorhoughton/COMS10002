@@ -21,6 +21,7 @@ struct node * make_head(int new_entry)
   struct node * head;
   head=(struct node *)malloc(sizeof(struct node));
   head->entry=new_entry;
+  head->next=NULL;
   return head;
 }
 \end{lstlisting}
@@ -61,9 +62,8 @@ struct node * locate(struct node * it, int num)
 void add_node(struct node * here, int new_entry)
 {
   struct node * here_next=here->next;
-  here->next = (struct node *)malloc(sizeof(struct node));
+  here->next = make_head(new_entry);
   here->next->next=here_next;
-  here->next->entry=new_entry;
 }
 \end{lstlisting}
 \end{frame}
@@ -73,9 +73,7 @@ void append_node(struct node * head, int new_entry)
 {
   while(head->next!=NULL)
     head=head->next;
-  head->next = 
-     (struct node *)malloc(sizeof(struct node));
-  head->next->entry=new_entry;
+  head->next = add_head(new_entry);
 }
 \end{lstlisting}
 \end{frame}
