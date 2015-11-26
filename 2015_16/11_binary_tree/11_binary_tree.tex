@@ -87,6 +87,9 @@ struct node * make_node(int new_entry)
   struct node * a_node=(struct node *)malloc(sizeof(struct node));
   a_node->entry=new_entry;
 
+  a_node->left=NULL;
+  a_node->right=NULL;
+
   return a_node;
 }
 \end{lstlisting}
