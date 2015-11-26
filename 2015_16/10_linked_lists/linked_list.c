@@ -87,9 +87,8 @@ void print_list(struct node * iterator)
 void add_node(struct node * here, int new_entry)
 {
   struct node * here_next=here->next;
-  here->next = (struct node *)malloc(sizeof(struct node));
+  here->next = make_head(new_entry);
   here->next->next=here_next;
-  here->next->entry=new_entry;
 }
 
 void append_node(struct node * head, int new_entry)
@@ -105,6 +104,7 @@ struct node * make_head(int new_entry)
 {
   struct node * head = (struct node *)malloc(sizeof(struct node));
   head->entry=new_entry;
+  head->next=NULL;
   return head;
 }
 

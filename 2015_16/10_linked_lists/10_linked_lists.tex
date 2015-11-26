@@ -92,6 +92,7 @@ struct node * make_head(int new_entry)
 {
   struct node * head = (struct node *)malloc(sizeof(struct node));
   head->entry=new_entry;
+  head->next=NULL;
   return head;
 }
 \end{lstlisting}
@@ -162,9 +163,8 @@ its node.
 void add_node(struct node * here, int new_entry)
 {
   struct node * here_next=here->next;
-  here->next = (struct node *)malloc(sizeof(struct node));
+  here->next = make_head(new_entry);
   here->next->next=here_next;
-  here->next->entry=new_entry;
 }
 \end{lstlisting}
 \caption{Add a node after here. here\_next stores the location of here-$>$next, the new node is added at here-$>$next and this new nodes next is set to here\_next.\label{c_add}}
@@ -177,8 +177,7 @@ void append_node(struct node * head, int new_entry)
 {
   while(head->next!=NULL)
     head=head->next;
-  head->next = (struct node *)malloc(sizeof(struct node));
-  head->next->entry=new_entry;
+  head->next = add_head(new_entry);
 }
 \end{lstlisting}
 \caption{Append a node. This goes to the end of the list and adds the
