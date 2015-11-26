@@ -92,6 +92,7 @@ struct node * make_head(int new_entry)
 {
   struct node * head = (struct node *)malloc(sizeof(struct node));
   head->entry=new_entry;
+  head->next=NULL;
   return head;
 }
 \end{lstlisting}
