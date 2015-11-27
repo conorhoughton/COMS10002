@@ -18,7 +18,7 @@ int hash(char *str,int table_size)
 
 int main()
 {
-  int table_size=10000;
+  int table_size=1009;
 
   char elbow6[6] = "elbow";
   printf("hash value=%i\n",hash(elbow6,table_size));
