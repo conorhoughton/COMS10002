@@ -15,6 +15,16 @@ including tail recursion and the stack. Based on 4_recursion.
 
 5. lecture 5 (2015-10-28) the master theorem again, some examples. The
 Fibonacci sequence, solution, run time. Sorting: discussion of the
-memory use for insert sort. Fire alarm. Based on 5_mast and
+memory use for insert sort. Fire alarm. Based on 5_master and
 6_fibonacci, very start of 7_quicksort.
+
+6. lecture 6 (2015-11-04) more on quicksort, disasterous attempt to quick sort students. Based on 7_quicksort.
+
+7. lecture 7 (2015-11-18) class survey. Quicksort done again, with pivot removed from the recursion this time. Mergesort. Based on 7_quicksort and 8_merge_sort.
+
+8. lecture 8 (2015-11-23) Reflections on class survey. All about radix sort, the start of linked lists. Based on all of 9_radix_sort and some of 10_linked_lists.
+
+9. lecture 9 (2015-11-25) Linked lists and binary trees: implementation of linked lists and discussion of binary trees. Based on 10_linked_lists and 11_binary_trees.
+
+10. lecture 10 (2015-12-02) AVL trees, introduction and LL rotations, start of LR rotations. Based on most of 12_avl_trees.
 
