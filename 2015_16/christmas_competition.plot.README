@@ -1,0 +1,17 @@
+gnuplot> set xlabel "entries to the Christmas competition"
+gnuplot> set ylabel "random offsets"
+gnuplot> set yrange [0:0.2]                                                     gnuplot> set size ratio -1
+gnuplot> set xrange [-0.05:1]
+gnuplot> unset ytics
+gnuplot> plot "christmas_competition.dat" us 1:(0.1*(rand(0))+0.05)
+gnuplot> unset key
+gnuplot> set terminal pdf
+Terminal type set to 'pdfcairo'
+Options are ' transparent fontscale 0.5 size 5.00in, 3.00in '
+gnuplot> set output "christmas_competition.pdf"
+gnuplot> replot
+gnuplot> set terminal wxt
+Terminal type set to 'wxt'
+Options are '0'
+gnuplot> replot
+Closing christmas_competition.pdf
