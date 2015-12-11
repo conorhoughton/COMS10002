@@ -1,23 +1,26 @@
 
-enum{SIZE=4};
-
-
+enum{DIM=4};
 
 struct Point
 {
   double value;
-  double x[SIZE];
-} Point;
+  double x[DIM];
+} 
 
-Point* make_point(int dim,double this_x[SIZE],double this_value)
+typedef struct Point Point;
+
+Point* make_point(double this_x[DIM],double (*fxn)())
 {
-  Point* new_point=(point *)malloc(sizeof(Point));
-  new_point->x=this_x;
-  new_point->value=this_value;
+  Point*  point=malloc(sizeof(Point));
+  int i=0;
+  for(i=0;i<DIM;i++)
+    (*point).x[i]=this_x[i];
 
-  return new_point;
+  point->value=(*fxn)(this_x);
+
+  return point;
 }
 
-Point* 
+
   
   
