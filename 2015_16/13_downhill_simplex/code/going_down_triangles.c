@@ -1,3 +1,11 @@
+//going_down_triangles.c
+//a simplex method program for printing out triangles
+//2015 Conor Houghton conor.houghton@bristol.ac.uk
+
+//To the extent possible under law, the author has dedicated all copyright 
+//and related and neighboring rights to this software to the public domain 
+//worldwide. This software is distributed without any warranty. 
+
 #include<stdlib.h>
 #include<stdio.h>
 #include<math.h>
