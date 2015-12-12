@@ -17,6 +17,11 @@ void make_postamble(FILE *output_file)
 {
   fputs("\\end{document}\n",output_file);
 }
+
+void add_title(FILE *output_file, char* title)
+{
+  fprintf(output_file,"\\section*{%s}\n",title);
+}
   
 void add_triangle(FILE *output_file,double x[2],double y[2],double z[2])
 {

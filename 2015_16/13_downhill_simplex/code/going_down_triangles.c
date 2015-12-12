@@ -36,16 +36,32 @@ double rosenbrock(double x[DIM])
   return (1-x[0])*(1-x[0])+100.0*pow(x[1]-x[0]*x[0],2);
 }
 
+//goldstein-price function 
+//https://en.wikipedia.org/wiki/Test_functions_for_optimization
+double goldstein_price(double x_v[DIM])
+{
+  double f;
+  double x=x_v[0]/10.0;
+  double y=x_v[1]/10.0;
+
+  f =(1+pow(x+y+1,2)*(19-14*x+3*x*x-14*y+6*x*y+3*y*y))
+    *(30+pow(2*x-3*y,2)*(18-32*x+12*x*x+48*y-36*x*y+27*y*y));
+
+  return f;
+}
+   
+
 
 int main()
 {
   double (*fxn)();
   // fxn=hyper_ellipsoid;
   fxn=rosenbrock;
+  //  fxn=goldstein_price;
 
   Point* points[DIM];
 
-  double x[DIM]={25,45};
+  double x[DIM]={20,10};
   double epsilon=0.5;
 
   make_points(x,epsilon,fxn,points);
@@ -54,7 +70,7 @@ int main()
   print_point(points[1]);
   print_point(points[2]);
   */
-  int step_c,step_n=150;
+  int step_c,step_n=250;
 
   Point *xo=malloc(sizeof(Point));
   Point *xr=malloc(sizeof(Point));
@@ -70,6 +86,7 @@ int main()
   output_file=fopen("triangles.tex","w");
 
   make_preamble(output_file);
+  add_title(output_file,"Rosenbrock");
 
   for(step_c=0;step_c<step_n;step_c++)
     {
