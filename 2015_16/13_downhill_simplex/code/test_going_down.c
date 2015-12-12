@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<math.h>
 
-enum{DIM=2};
+enum{DIM=3};
 
 #include "downhill_simplex.c"
 
@@ -16,14 +16,25 @@ double quad(double x[DIM])
   return total;
 }
 
+//p5 http://www.geatbx.com/download/GEATbx_ObjFunExpl_v38.pdf
+double hyper_ellipsoid(double x[DIM])
+{
+  double total=0;
+  int i;
+  for(i=0;i<DIM;i++)
+    total+=(i+1)*pow(x[i],2);
+
+  return total;
+}
+
 int main()
 {
   double (*fxn)();
-  fxn=quad;
+  fxn=hyper_ellipsoid;
 
   Point* points[DIM];
 
-  double x[DIM]={20,20};
+  double x[DIM]={20,20,20};
   double epsilon=0.25;
 
   make_points(x,epsilon,fxn,points);
@@ -31,6 +42,7 @@ int main()
   print_point(points[0]);
   print_point(points[1]);
   print_point(points[2]);
+  print_point(points[3]);
   
   int step_c,step_n=100;
 
@@ -91,7 +103,7 @@ int main()
 	  
 	}
 
-      printf("%c",move);	  
+      printf("%c(%f)",move,best_value);	  
 	  
 
 
