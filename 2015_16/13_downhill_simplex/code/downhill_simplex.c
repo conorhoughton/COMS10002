@@ -42,10 +42,21 @@ Point* make_point_zero(double this_x[DIM])
   return point;
 }
 
+void copy_value(Point* from,Point* to)
+{
+  int i;
+  for(i=0;i<DIM;i++)
+    (to->x)[i]=(from->x)[i];
+
+  to->value=from->value;
+
+}
 
 
 void set_centroid(Point* points[DIM+1],int worst,Point* centroid)
 {
+
+
   double center[DIM];
   
   int i,j;
@@ -58,11 +69,13 @@ void set_centroid(Point* points[DIM+1],int worst,Point* centroid)
       for(j=0;j<DIM;j++)
 	center[j]+=(points[i])->x[j];
  
+
   for(i=0;i<DIM;i++)
     {
       center[i]/=DIM;
       (centroid->x)[i]=center[i];
     }
+
 
   centroid->value=0;
 }
@@ -134,15 +147,15 @@ void best_and_worst(Point* points[DIM+1],int *best,int *worst)
   if(worst_val<best_val)
     {
       best_val=worst_val;
-      *best=0;
+      *best=1;
       worst_val=points[0]->value;
-      *worst=1;
+      *worst=0;
     }
   
   int i;
   double this_val;
   
-  for(i=2;i<DIM;i++)
+  for(i=2;i<DIM+1;i++)
     {
       this_val=points[i]->value;
       if(this_val>worst_val)
