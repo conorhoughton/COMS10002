@@ -29,6 +29,21 @@ Point* make_point(double this_x[DIM],double (*fxn)())
   return point;
 }
 
+
+Point* make_point_zero(double this_x[DIM])
+{
+  Point*  point=malloc(sizeof(Point));
+  int i=0;
+  for(i=0;i<DIM;i++)
+    (*point).x[i]=this_x[i];
+
+  point->value=0;
+
+  return point;
+}
+
+
+
 void set_centroid(Point* points[DIM+1],int worst,Point* centroid)
 {
   double center[DIM];
@@ -123,10 +138,10 @@ void best_and_worst(Point* points[DIM+1],int *best,int *worst)
       worst_val=points[0]->value;
       *worst=1;
     }
-
+  
   int i;
   double this_val;
-
+  
   for(i=2;i<DIM;i++)
     {
       this_val=points[i]->value;
@@ -140,6 +155,28 @@ void best_and_worst(Point* points[DIM+1],int *best,int *worst)
 	  best_val=this_val;
 	  *best=i;
 	}
-
+      
     }
+  
+}
+ 
+void make_points(double x0[DIM],double epsilon,double (*fxn)(),Point* points[DIM+1])
+{
+
+  points[0]=make_point(x0,fxn);
+
+  int i;
+
+  for(i=1;i<DIM+1;i++)
+    {
+      points[i]=make_point_zero(x0);
+      int rand_int=rand();
+      double rand_offset=0.5*epsilon*(1+(double)rand_int/RAND_MAX);
+      if(rand_int%2==0)
+	(points[i]->x)[i-1]+=rand_offset;
+      else
+	(points[i]->x)[i-1]-=rand_offset;
+      points[i]->value=(*fxn)(points[i]->x);
+    }
+
 }
