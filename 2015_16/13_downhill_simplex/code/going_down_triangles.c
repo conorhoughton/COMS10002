@@ -30,23 +30,31 @@ double hyper_ellipsoid(double x[DIM])
   return total;
 }
 
+//https://en.wikipedia.org/wiki/Rosenbrock_function
+double rosenbrock(double x[DIM])
+{
+  return (1-x[0])*(1-x[0])+100.0*pow(x[1]-x[0]*x[0],2);
+}
+
+
 int main()
 {
   double (*fxn)();
-  fxn=hyper_ellipsoid;
+  // fxn=hyper_ellipsoid;
+  fxn=rosenbrock;
 
   Point* points[DIM];
 
-  double x[DIM]={10,10};
+  double x[DIM]={25,45};
   double epsilon=0.5;
 
   make_points(x,epsilon,fxn,points);
-  
+  /*
   print_point(points[0]);
   print_point(points[1]);
   print_point(points[2]);
-  
-  int step_c,step_n=100;
+  */
+  int step_c,step_n=150;
 
   Point *xo=malloc(sizeof(Point));
   Point *xr=malloc(sizeof(Point));
@@ -108,13 +116,18 @@ int main()
 	    }
 	  
 	}
-
+      /*
       printf("\n");
       print_point(points[0]);
       print_point(points[1]);
       print_point(points[2]);
       printf("%c(%f)",move,best_value);	  
-     
+      */
+      int i;
+      for(i=0;i<2;i++)
+	printf("%f ",((points[0]->x)[i]+(points[1]->x)[i]+(points[2]->x)[i])/3.0);
+      printf("\n");
+
       add_centered_triangle(output_file,points[0]->x,points[1]->x,points[2]->x);
 
 

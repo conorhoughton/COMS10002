@@ -42,7 +42,7 @@ void add_centered_triangle(FILE *output_file,double x[2],double y[2],double z[2]
 
   for(i=0;i<2;i++)
     {
-      c=x[i]+y[i]+z[i];
+      c=(x[i]+y[i]+z[i])/3.0;
       x_c[i]=x[i]-c;
       y_c[i]=y[i]-c;
       z_c[i]=z[i]-c;
