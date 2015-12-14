@@ -63,30 +63,26 @@ double goldstein_price(double x_v[DIM])
 int main()
 {
   double (*fxn)();
-  // fxn=hyper_ellipsoid;
-  fxn=rosenbrock;
+  fxn=hyper_ellipsoid;
+  //fxn=rosenbrock;
   //  fxn=goldstein_price;
 
   Point* points[DIM];
 
-  double x[DIM]={20,10};
+  double x[DIM]={20,50};
   double epsilon=0.5;
 
   make_points(x,epsilon,fxn,points);
-  /*
-  print_point(points[0]);
-  print_point(points[1]);
-  print_point(points[2]);
-  */
-  int step_c,step_n=250;
+
+  int step_c,step_n=450;
 
   Point *xo=malloc(sizeof(Point));
   Point *xr=malloc(sizeof(Point));
   Point *xc=malloc(sizeof(Point));
   Point *xe=malloc(sizeof(Point));
 
-  int best,worst;
-  double best_value,worst_value;
+  int best,worst,second_worst;
+  double best_value,worst_value,second_worst_value;
 
   char move='s';
 
@@ -94,13 +90,16 @@ int main()
   output_file=fopen("triangles.tex","w");
 
   make_preamble(output_file);
-  add_title(output_file,"Rosenbrock");
+  //  add_title(output_file,"Rosenbrock");
+  add_title(output_file,"Hyper-ellipsoid");
 
   for(step_c=0;step_c<step_n;step_c++)
     {
-      best_and_worst(points,&best,&worst);
+
+      best_and_worst(points,&best,&worst,&second_worst);
       best_value=points[best]->value;
       worst_value=points[worst]->value;
+      second_worst_value=points[second_worst]->value;
 
       set_centroid(points,worst,xo);
 
@@ -120,7 +119,7 @@ int main()
 	      move='r';
 	    }
 	}
-      else if(xr->value<worst_value)
+      else if(xr->value<second_worst_value)
 	{
 	  copy_value(xr,points[worst]);
 	  move='r';

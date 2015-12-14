@@ -144,7 +144,7 @@ void reduce(Point* points[DIM],int best,double(*fxn)())
       
 
 
-void best_and_worst(Point* points[DIM+1],int *best,int *worst)
+void best_and_worst(Point* points[DIM+1],int *best,int *worst,int * second_worst)
 {
   *best=0;
   double best_val=points[0]->value;
@@ -174,9 +174,24 @@ void best_and_worst(Point* points[DIM+1],int *best,int *worst)
 	{
 	  best_val=this_val;
 	  *best=i;
-	}
-      
+	} 
     }
+
+  *second_worst=*best;
+  worst_val=best_val;
+
+  
+  for(i=2;i<DIM+1;i++)
+    if(i!=*worst)
+      {
+	this_val=points[i]->value;
+	if(this_val>worst_val)
+	  {
+	    worst_val=this_val;
+	    *second_worst=i;
+	  }
+      }
+  
   
 }
  
