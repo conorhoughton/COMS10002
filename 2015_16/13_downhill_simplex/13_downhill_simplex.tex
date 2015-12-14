@@ -8,6 +8,7 @@
 
 \documentclass[11pt,a4paper]{scrartcl}
 \typearea{12}
+\usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{pstricks}
 \usepackage{listings}
@@ -22,18 +23,141 @@
 
 \subsection*{13 - downhill simplex}
 
+Another broad category of algorithms relate to optimization. These are
+frequently of use in problems where computer scientists are working
+with people from other disciplines rather than working on problems
+that arise out of computer science itself and to an even greater
+extent than the data-based algorithms, their performance is difficult
+to assess abstractly, optmization algorithms must be assessed in the
+context of the particular problem they are intended to solve.
+
+In a typical optimization problem the goal is to minimize some
+function, $E$ that depends on lots of parameters, so $E(\mathbf{x})$ where
+\begin{equation}
+\mathbf{x}=(x_1,x_2,\ldots,x_n)
+\end{equation}
+$E$ is often called an objective function.
+
+This situation applies in a diversity of situations. In physics $E$
+might be an energy function related to the configuration of a
+mechanical system or, for a particle physicist, a configuation of
+fields like the electromagnetic field or its generalizations. For
+someone working on machine learning it might measure the error made by
+a neural network, in this situation $E$ is called an error function
+and $\mathbf{x}$ are the parameters describing the neural network. In
+statistics $E$ might be the log-liklihood, a measure of how well a
+stastical model predicts the data. In neuroscience, the model might be
+a computational model of a neuron or synapse and $\mathbf{x}$ would
+correspond to the components of that model, for example the number of
+different types of ion gates. In this example optimizating the model
+to fit electro-physiological recording will predict the composition of
+the neuron or synapse. 
+
+In any case, the idea is to find the value fo $\mathbf{x}$ that gives
+the lowest value of $E(\mathbf{x})$. The best way of doing this
+depends on the dimension of $\mathbf{x}$, on how much is known about
+$E$, on its properties and how easy it is to calculate. For example,
+the hardest optimization problems are often ones where $E$ has many
+local minima so that optimation algorithms end up finding these and
+missing the global minimum. This isn't a problem we are going to
+discuss here.
+
+
+\subsubsection*{Some optimatization algorithms}
+
+Obivously we know the functional form of $E$ we can find its minimum using calculus. For example, say
+\begin{equation}
+E(x_1,x_2)=(1-x_1)^2+100(x_2-x_1^2)^2
+\end{equation}
+we would calculate the two partial derivatives and setting them to zero
+\begin{equation}
+\begin{aligned}
+0&=\frac{\partial E}{\partial x_1}=2(1-x_1)-400x_1(x_2-x_1^2)\\
+0&=\frac{\partial E}{\partial x_2}=200(x_2-x_1^2)
+\end{aligned}
+\end{equation}
+which is solved by $x_1=x_2=1$. However, this isn't the sort of
+problem we are thinking about here, we are envisaging situations were
+$E$ cannot be treated analytically like this, so, for example, $E$
+itself must be calculated numerically for a given value of
+$\mathbf{x}$.
+
+Another approach might be to divide the space of $\mathbf{x}$ values
+up into a grid and check them all; this is known as grid-search and is
+sometimes the best method for problems where $\mathbf{x}$ has only a
+small number of dimensions and $E$ is very quick to
+calculated. However, because the number of grid points is very large,
+particularly if the variability of $E$ means the grid has to be fine,
+or if the number of dimensions is not small, grid search can be
+impractical or out of the question.
+
+Another popular set of methods are related to gradient
+descent. Roughly speaking this involves working out what direction is
+down and heading that way. The gradient is a vector pointing in the
+direction $E$ increases most, the simplest gradient method is to start
+at an initial value $\mathbf{x}_0$ and iterate
+\begin{equation}
+\mathbf{x}_{n+1}=\mathbf{x}_n-\eta \mathbf{\nabla}E
+\end{equation}
+where ${\nabla}E$ is the gradient and $\eta$ is a, usually small, step
+size. Now, if the functional form of $E$ is known, the gradient can be
+worked out using calculus, and even in situations where $E$ has to be
+calculated numerically it may be possible to find a similar numerical
+scheme to calculate the gradient. This is often the case for error
+functions in machine learning, for example. However, it is not always
+the case that the gradient can be easily estimated.
+
+Even if the gradient is known, gradient descent methods can be
+tricky. One problem is with the size of $\eta$: the scale of the $E$
+landscape can change; often if $\mathbf{x}$ is a long way away from
+the optimal value $E$ is very smooth so it would be useful to take
+long steps, but near the minimum the features become much finer, so
+small steps are needed. If $\eta$ is too small the method spends for
+ages taking tiny steps down the hill side, if it is too big it steps
+right over important features at the bottom. Another problem is with
+thin valleys, if the step size is too large then it successive steps
+oscillate backwards and forwards across the valley rather than
+following it down to the minimum. There are solutions to these
+problems, for example the method called conjugate gradients seeks to
+choose the successive steps to follow the gradient but to avoid the
+sort of repetitive backtracking that can happen at thin valleys.
+
+\subsubsection*{Downhill simplex}
+
+The problem of optimization is a rich and complicated one; here we
+will consider in detail one simple approach: the downhill simplex or
+Nelder-Mead method. For many problems it will not be the fastest way
+to find the optimum in terms of run time or the number of function
+evaluations, but it is often a method that works without having to
+learn too much about the properties of the objective function; in
+other words, it is often the quickest way to solve the problem if you
+include the researchers time along with the time it takes to run. It
+also does not require gradient information.
+
+A simplex is a generalization of a triangle, just as a triangle is
+defined in two-dimensional space and has three vertices and a
+tetrahedron is defined in three-dimensional space and have four
+vertices, a $n$-dimensional simplex has $n+1$-vertices. It is not
+regular, the distances between the vertices need not be the same, but
+there is required that it isn't flat: if you remove one vertex the
+remaining $n$ vertices are linearly independent.
+
+Now the idea of downhill simplex is that a simplex kind of ooches
+around looking for the minimum. It does this, roughly speaking, but
+taking the worst vertex, the one with the largest value of $E$, and
+replacing it with a better one. 
+
+
+
+
 \begin{figure}
 \begin{center}
 \begin{tikzpicture}
-\coordinate (x1) at (0,0);
-\coordinate (x2) at (5,0);
-\coordinate (x3) at (2.5,4.33);
-\node[draw=red](x1n) at (x1) {$x_1$};
-\node[draw=red](x2n) at (x2) {$x_2$};
-\node[draw=red](x3n) at (x3) {$x_3$};
-\draw (x1n) -- (x2n);
-\draw (x2n) -- (x3n);
-\draw (x3n) -- (x1n);
+\coordinate (x1) at (0,0); \coordinate (x2) at (5,0); \coordinate (x3)
+at (2.5,4.33); \node[draw=red](x1n) at (x1) {$x_1$};
+\node[draw=red](x2n) at (x2) {$x_2$}; \node[draw=red](x3n) at (x3)
+     {$x_3$}; \draw (x1n) -- (x2n); \draw (x2n) -- (x3n); \draw (x3n)
+     -- (x1n);
 \end{tikzpicture}
 \end{center}
 \caption{A simplex is a generalization of a triangle to higher numbers
@@ -76,7 +200,6 @@
 \draw[dashed] (x2n) -- (x3n);
 \draw[dashed] (x3n) -- (x1n);
 
-
 \coordinate (x1r) at (8,9.33);
 \coordinate (x2r) at (13,9.33);
 \coordinate (x3r) at (10.5,13.66);
@@ -101,7 +224,12 @@
 \end{tikzpicture}
 \end{center}
 
-\caption{This illustates reflection \textbf{(a)} and expansion \textbf{(b)}. In reflection the worst point is reflected through $\mathbf{x}_0$, the center of the remaining points to give a new point $\mathbf{x}_r$. Expansion goes from $\mathbf{x}_0$ to $\mathbf{x}_r$ and continues the same distance again in the same direction to give $\mathbf{x}_e$\label{fig:refexp} }
+\caption{This illustates reflection \textbf{(a)} and expansion
+  \textbf{(b)}. In reflection the worst point is reflected through
+  $\mathbf{x}_0$, the center of the remaining points to give a new
+  point $\mathbf{x}_r$. Expansion goes from $\mathbf{x}_0$ to
+  $\mathbf{x}_r$ and continues the same distance again in the same
+  direction to give $\mathbf{x}_e$\label{fig:refexp} }
 \end{figure}
 
 \begin{figure}
