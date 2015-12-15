@@ -29,7 +29,7 @@ are frequently of use in problems where computer scientists are
 working with people from other disciplines rather than working on
 problems that arise out of computer science itself. To an even greater
 extent than the data-based algorithms, the performance of optimization
-algorithms is difficult to assess abstractly, optmization algorithms
+algorithms is difficult to assess abstractly, optimization algorithms
 must be assessed in the context of the particular problem they are
 intended to solve.
 
@@ -38,36 +38,36 @@ function, $E$ that depends on lots of parameters, so $E(\mathbf{x})$ where
 \begin{equation}
 \mathbf{x}=(x_1,x_2,\ldots,x_n)
 \end{equation}
-$E$ is often called an objective function.
+$E$ is often called an objective function and the idea is to find the values of $\mathbf{x}$ that minimize $E$.
 
 This situation applies in a diversity of situations. In physics $E$
 might be an energy function related to the configuration of a
 mechanical system with $\mathbf{x}$ representing the positions of the
-components, or, for a particle physicist, a configuation of fields
+components, or, for a particle physicist, a configuration of fields
 like the electromagnetic field or its generalizations with
 $\mathbf{x}$ representing field values. For someone working on machine
 learning it might measure the error made by a neural network, in this
 situation $E$ is called an error function and $\mathbf{x}$ are the
 parameters describing the neural network. In statistics $E$ might be
-the log-liklihood, a measure of how well a stastical model predicts
+the log-likelihood, a measure of how well a statistical model predicts
 the data. In neuroscience, the model might be a computational model of
 a neuron or synapse and $\mathbf{x}$ would correspond to the
 components of that model, for example the number of each of the
-different types of ion gates. In this example optimizating the model
+different types of ion gates. In this example optimization the model
 to fit electro-physiological recording will predict the composition of
 the neuron or synapse.
 
-In any case, the idea is to find the value fo $\mathbf{x}$ that gives
+In any case, the idea is to find the value of $\mathbf{x}$ that gives
 the lowest value of $E(\mathbf{x})$. The best way of doing this
 depends on the dimension of $\mathbf{x}$, on how much is known about
 $E$, on its properties and how easy it is to calculate. The hardest
 optimization problems are often ones where $E$ has many local minima
-so that optimation algorithms end up finding these and missing the
+so that optimization algorithms end up finding these and missing the
 global minimum. This isn't a problem we are going to discuss here.
 
-\subsubsection*{Some optimatization algorithms}
+\subsubsection*{Some optimization algorithms}
 
-Obivously we know the functional form of $E$ we can find its minimum
+Obviously we know the functional form of $E$ we can find its minimum
 using calculus. For example, say
 \begin{equation}
 E(x_1,x_2)=(1-x_1)^2+100(x_2-x_1^2)^2
@@ -91,10 +91,10 @@ up into a grid and to check them all; this is known as grid-search and
 is sometimes the best method for problems where $\mathbf{x}$ has only
 a small number of dimensions and $E$ is very quick to
 calculated. However, $E$ might be slow to calculated, for example, in
-neuroscience examples, the model might take a while to
+neuroscience examples, the model might take a quite a while to
 run. Furthermore, the number of grid points may be very large,
 particularly if the variability of $E$ means the grid has to be fine,
-or if the number of dimensions is not small, grid search can be
+or if the number of dimensions is not small. Often grid search is
 impractical or out of the question.
 
 Another popular set of methods is related to gradient descent. Roughly
@@ -164,16 +164,19 @@ at (2.5,4.33); \node[draw=red](x1n) at (x1) {$x_1$};
 A simplex is a generalization of a triangle, just as a triangle is
 defined in two-dimensional space and has three vertices and a
 tetrahedron is defined in three-dimensional space and have four
-vertices, a $n$-dimensional simplex has $n+1$-vertices. It is not
-regular in general, the distances between the vertices need not be the
-same, but there is required that it isn't flat: if you remove one
+vertices, a $n$-dimensional simplex has $(n+1)$-vertices. Here we will
+be considering simplices in the space of parameters values
+$\mathbf{x}$ so the vertices will be
+$\{\mathbf{x}_1,\mathbf{x}_2,\ldots,\mathbf{x}_{n+1}\}$. Simplices are
+not regular in general, the distances between the vertices need not be
+the same, but there is required that it isn't flat: if you remove one
 vertex the remaining $n$ vertices should be linearly independent.
 
 Now the idea of downhill simplex is that a simplex kind of ooches
 around looking for the minimum. It does this, roughly speaking, by
 taking the worst vertex, the one with the largest value of $E$, and
 replacing it with a better one. There are a number of different
-operations that achieve this, which is used depends on the precise
+operations that achieve this, which is used depends on the 
 situation.
 
 \begin{figure}
@@ -209,19 +212,19 @@ objective function, so
 E(\mathbf{x}_1)\le E(\mathbf{x}_2)\le \ldots \le E(\mathbf{x}_{n+1})
 \end{equation}
 This order is done at the start of each iteration, though obvious in
-doesn't involve renumber, that is just done here for notational
+doesn't involve renumbering, that is just done here for notational
 convenience. The idea generally is to replace $\mathbf{x}_{n+1}$. It
-is useful to define the center of the remaining points:
+is useful to define the centroid of the remaining points:
 \begin{equation}
 \mathbf{x}_o=\frac{1}{n}\sum_{i=1}^n\mathbf{x}_i
 \end{equation}
 Now let $\mathbf{x}_r$ be the point you get to by reflecting
 $\mathbf{x}_{n+1}$ in the $n$-dimensional simplex formed by the
-remaining points is
+remaining points. It is
 \begin{equation}
 \mathbf{x}_r=\mathbf{x}_o+(\mathbf{x}_o-\mathbf{x}_{n+1})
 \end{equation}
-Often this will be a sort of reasonable point so that if it replaced
+Often this will be a sort of \lq{}reasonable point\rq{} so that if it replaced
 $\mathbf{x}_{n+1}$ it would not be the best nor the worst, that is
 \begin{equation}
 E(\mathbf{x}_1)\le E(\mathbf{x}_r < E(\mathbf{x}_n)
@@ -230,17 +233,16 @@ In this case use it is used to replace $\mathbf{x}_{n+1}$:
 \begin{equation}
 \mathbf{x}_{n+1}\leftarrow \mathbf{x}_r
 \end{equation}
-and then the algorithm progresses by working out the new order of the
-points and repeating. This is called reflection and is shown in
+This is called reflection and is shown in
 Fig.\ref{fig:reflection}.
 
-Reflection is the most common case, but there are others. The
-reflected point $x_r$ might be better all of the existing points,
-so
+There are other cases. The reflected point $x_r$ might be better all
+of the existing points, so
 \begin{equation}
 E(\mathbf{x}_r)<E(\mathbf{x}_1)
 \end{equation}
-in which case it is worth trying to go even further in the same direction by considering $\mathbf{x}_e$:
+in which case it is worth trying to go even further in the same
+direction by considering the so called expansion point $\mathbf{x}_e$:
 \begin{equation}
 \mathbf{x}_e=\mathbf{x}_o+2(\mathbf{x}_o-\mathbf{x}_{n+1})
 \end{equation}
@@ -255,7 +257,7 @@ otherwise
 as before. The expansion point is illustrated in
 Fig.~\ref{fig:refexp}. One advantage of expansion is that it makes the
 simplex bigger; since going from the reflection point to the expansion
-point gives an even lower value of the objective function it seems
+point gives an even lower value of the objective function it is likely
 that the relevant features of the landscape are larger than the
 simplex. This is one advantage of the simplex approach, the size of
 the simplex changes to match scale of detail in the landscape.
@@ -281,7 +283,7 @@ the simplex changes to match scale of detail in the landscape.
 \node[draw=red](x1n) at (x1) {$x_1$};
 \node[draw=red](x2n) at (x2) {$x_2$};
 \node[draw=red](x3n) at (x3) {$x_3$};
-\node[draw=red](x0n) at (x0) {$x_0$};
+\node[draw=red](x0n) at (x0) {$x_o$};
 \node[draw=red](xrn) at (xr) {$x_r$};
 
 \draw (x1n) -- (x0n);
@@ -302,7 +304,7 @@ the simplex changes to match scale of detail in the landscape.
 \node[draw=red](x1nr) at (x1r) {$x_1$};
 \node[draw=red](x2nr) at (x2r) {$x_2$};
 \node[draw=red](x3nr) at (x3r) {$x_3$};
-\node[draw=red](x0nr) at (x0r) {$x_0$};
+\node[draw=red](x0nr) at (x0r) {$x_o$};
 \node[draw=red](xenr) at (xer) {$x_e$};
 
 \draw (x1nr) -- (x0nr);
@@ -317,7 +319,7 @@ the simplex changes to match scale of detail in the landscape.
 \end{tikzpicture}
 \end{center}
 
-\caption{This illustates reflection \textbf{(a)} and expansion
+\caption{This illustrates reflection \textbf{(a)} and expansion
   \textbf{(b)}. In reflection the worst point is reflected through
   $\mathbf{x}_0$, the center of the remaining points to give a new
   point $\mathbf{x}_r$. Expansion goes from $\mathbf{x}_0$ to
@@ -325,16 +327,17 @@ the simplex changes to match scale of detail in the landscape.
   direction to give $\mathbf{x}_e$\label{fig:refexp} }
 \end{figure}
 
-Another possibility is that the reflection
-point would be the worst point
+Another possibility is that the reflection point would be the worst
+point if it replaced $\mathbf{x}_{n+1}$:
 \begin{equation}
 E(\mathbf{x}_r)>E(\mathbf{x}_n)
 \end{equation}
 Replacing $x_{n+1}$ with $x_r$ in this situation would lead to
-wasteful repeative moves. It also implies that the simplex is too big,
-reflecting the worst point causes it to skip over a region where there
-are lower values of the objective function. As such a new point is
-defined, the contraction point
+wasteful repetitive moves. It also implies that the simplex is too
+big, reflecting the worst point causes it to skip over a region around
+the points $\{\mathbf{x_1},\mathbf{x_2},\ldots,\mathbf{x}_n\}$ where
+there are lower values of the objective function. To deal with this a
+new point is defined, the contraction point
 \begin{equation}
 \mathbf{x}_c=\mathbf{x}_o-(\mathbf{x}_o-\mathbf{x}_{n+1})/2
 \end{equation}
@@ -344,22 +347,24 @@ If $E(\mathbf{x}_c)<E(\mathbf{x}_{n+1})$ then
 \end{equation}
 Finally, if this does not work, there is an emergency move called
 reduction which shrinks the whole simplex towards the best point. In
-this move all the points except $\mathbf{x}_1$ are replaced by the point half-way to $\mathbf{x}_1$
+this move all the points except $\mathbf{x}_1$ are replaced by the
+point half-way to $\mathbf{x}_1$ so
 \begin{equation}
 \mathbf{x}_i=(\mathbf{x}_i+\mathbf{x}_1)/2
 \end{equation}
-Reduction and contraction are both illustrated in
-Fig.~\ref{fig:conred} and a flow chart for the whole algorithm is
-given in Fig.~\ref{fig:flowchart}.
+for $i=2,3,\ldots,(n+1)$. Reduction and contraction are both
+illustrated in Fig.~\ref{fig:conred} and a flow chart for the whole
+algorithm is given in Fig.~\ref{fig:flowchart}.
 
-Obviously after any of these moves the points are reordered and the
+Obviously after any of these moves the points are reordered, or in
+fact the best, worst and second worst points identified, and the
 algorithm repeats. However, practically, a stopping criterion needs to
 be devised. This usually says that the algorithm stops when the
 simplex vertices have values of the objective function that are
-extremely close to each other, where \lq{}extemely\rq{} represents
-some specified tolerance. Often a maximum number of iterations is also
-specified in case the algorithm doesn't converge.
-
+extremely close to each other and are unchanging from iteration to
+iteration, where \lq{}extremely\rq{} here stands some specified
+tolerance. Often a maximum number of iterations is also specified in
+case the algorithm doesn't converge.
 
 \begin{figure}
 \begin{center}
@@ -381,7 +386,7 @@ specified in case the algorithm doesn't converge.
 \node[draw=red](x1n) at (x1) {$x_1$};
 \node[draw=red](x2n) at (x2) {$x_2$};
 \node[draw=red](x3n) at (x3) {$x_3$};
-\node[draw=red](x0n) at (x0) {$x_0$};
+\node[draw=red](x0n) at (x0) {$x_o$};
 \node[draw=red](xcn) at (xc) {$x_c$};
 
 \draw (x1n) -- (x0n);
@@ -432,7 +437,7 @@ specified in case the algorithm doesn't converge.
 \tikzstyle{line} = [draw, -latex']
 \tikzstyle{cloud} = [draw, ellipse, node distance=3cm,
     minimum height=2em] 
-   
+
 
 \begin{figure}
 \begin{center}
@@ -442,12 +447,12 @@ specified in case the algorithm doesn't converge.
     \node [block, below of= order] (reflect){reflect: $\mathbf{x}_r$};
     \node[decision, below of= reflect] (xr){is $\mathbf{x}_r$ the best point};
     \node[block, right=1cm of xr] (expand){expand: $\mathbf{x}_e$};
-    \node[decision, right = 1cm of expand](xe){is $\mathbf{x}_e$ better than $\mathbf{x}_r$};
+    \node[decision, right = 1cm of expand](xe){$E(\mathbf{x}_e)<E(\mathbf{x}_r)$};
     \node[cloud,above of=xe](xn12xe){$\mathbf{x}_{n+1}\leftarrow \mathbf{x}_e$};
     \node[cloud,below of=xe](xn12xr){$\mathbf{x}_{n+1}\leftarrow \mathbf{x}_r$};
     \node[decision,below of=xr](xragain){$E(\mathbf{x}_r)>E(\mathbf{x}_n)$};
     \node[block,below =1cm of xragain](contract){contract: $\mathbf{x}_c$};
-    \node[decision,right =0.7cm of contract](xc){is $\mathbf{x}_c$ better than $\mathbf{x}_{n+1}$};
+    \node[decision,right =0.7cm of contract](xc){$E(\mathbf{x}_c)<E(\mathbf{x}_{n+1})$};
     \node[cloud,right =0.7cm of xc](xn12xc){$\mathbf{x}_{n+1}\leftarrow \mathbf{x}_c$};
     \node[cloud,below of= xc](reduce){reduce};
 
@@ -456,7 +461,7 @@ specified in case the algorithm doesn't converge.
     \path [line] (reflect) -> (xr);
 
     \path [line] (expand) -> (xe);
-    \path [line] (xragain) -> (contract);
+    \path [line] (xragain) -> node{yes}(contract);
     \path[line] (contract) -> (xc);
     \path [line] (xr) -> node{yes}(expand);    
     \path [line] (xr) -> node{no}(xragain);    
@@ -479,22 +484,25 @@ specified in case the algorithm doesn't converge.
   repeats.\label{fig:flowchart}}
 \end{figure}
 
-The downhill simplex is a simple, intuitively appealling and robust
+The downhill simplex is a simple, intuitively appealing and robust
 algorithm. It is easy to code. It is often the thing that you try to
 see if you can avoid doing something cleverer and hence
 trickier. However, there are better algorithms, the best algorithms
-like this that don't use gradient information involve chosing a
-direction and optimization the objective function in that direction
-before chosing another direction and repeating; the details of the
+like this that don't use gradient information involve choosing a
+direction and optimization the objective function in that direction,
+there are very good algorithms for minimizing functions of one
+variable and along a fixed line that is what this becomes. Another
+direction is then chosen and the one-dimensional optimization is
+repeated, and so on until the algorithm converges. The details of the
 algorithms account for how the directions are chosen.
 
-The biggest problem is what happens when there is more than one
-minimum, where there is a absolute minimum you are looking for and
-local minima that act as a trap for the simplex. One approach to this
-is to set the simplex off from lots of different initial conditions in
-the hope that one of them will reach the absolute minimum. Another
-method is to use something like simulated annealling or the genetic
-algorithm, these are designed to work well when the answer is hiding
-behind lots of local minima.
+A big problem is what happens when there is more than one minimum: the
+local minima that act as a trap for the simplex on its way to the
+global minimum. One approach to this is to set the simplex off from
+lots of different initial conditions in the hope that one of them will
+reach the absolute minimum. Another method is to use something like
+simulated annealing or the genetic algorithm, these are designed to
+work well when the answer is hiding behind lots of local minima, but
+tend to be slow and finickity.
 
 \end{document}
