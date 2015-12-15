@@ -62,8 +62,8 @@ double goldstein_price(double x_v[DIM])
 int main()
 {
   double (*fxn)();
-  //fxn=hyper_ellipsoid;
-  fxn=rosenbrock;
+  fxn=hyper_ellipsoid;
+  //  fxn=rosenbrock;
   //  fxn=goldstein_price;
 
   Point* points[DIM];
@@ -91,13 +91,13 @@ int main()
   FILE * output_file_all;
   output_file_all=fopen("all_triangles.tex","w");
 
+  char* title="Hyper-ellipsoid";
+  //char* title="Rosenbrock";
 
   make_preamble(output_file);
   make_preamble(output_file_all);
-  add_title(output_file,"Rosenbrock");
-  add_title(output_file_all,"Rosenbrock");
-  //add_title(output_file,"Hyper-ellipsoid");
-  //  add_title(output_file_all,"Hyper-ellipsoid");
+  add_title(output_file,title);
+  add_title(output_file_all,title);
 
   open_triangle(output_file_all);
 

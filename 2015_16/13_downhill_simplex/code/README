@@ -44,4 +44,10 @@ Then run and
 
 pdflatex triangles.tex
 
-to get a pdf file showing the triangles.
+to get a pdf file showing the individual triangles
+
+and 
+
+pdflatex all_triangles.tex
+
+so see all the triangles together.
