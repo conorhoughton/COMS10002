@@ -176,9 +176,9 @@ situation.
 \begin{tikzpicture}
 \coordinate (x1) at (0,0); 
 \coordinate (x2) at (5,2); 
-\coordinate (x3) at (0,5); 
+\coordinate (x3) at (0,7); 
 \coordinate (xo) at (2.5,1);
-\coordinate (xr) at (5,-3);
+\coordinate (xr) at (5,-5);
 \node[draw=red](x1n) at (x1) {$x_1$};
 \node[draw=red](x2n) at (x2) {$x_2$}; 
 \node[draw=red](x3n) at (x3) {$x_3$}; 
@@ -429,14 +429,14 @@ specified in case the algorithm doesn't converge.
 \begin{center}
 \begin{tikzpicture}[node distance = 2cm, auto]
     % Place nodes
-    \node [block] (order){$\mathbf{x}_1$ $\ldots$ $\mathbf{x}_{n+1}$};
+    \node [block] (order){order $\mathbf{x}_1$ $\ldots$ $\mathbf{x}_{n+1}$};
     \node [block, below of= order] (reflect){reflect: $\mathbf{x}_r$};
     \node[decision, below of= reflect] (xr){is $\mathbf{x}_r$ the best point};
     \node[block, right=1cm of xr] (expand){expand: $\mathbf{x}_e$};
     \node[decision, right = 1cm of expand](xe){is $\mathbf{x}_e$ better than $\mathbf{x}_r$};
     \node[cloud,above of=xe](xn12xe){$\mathbf{x}_{n+1}\leftarrow \mathbf{x}_e$};
     \node[cloud,below of=xe](xn12xr){$\mathbf{x}_{n+1}\leftarrow \mathbf{x}_r$};
-    \node[decision,below of=xr](xragain){is $E(\mathbf{x}_r)>E(\mathbf{x}_n)$};
+    \node[decision,below of=xr](xragain){$E(\mathbf{x}_r)>E(\mathbf{x}_n)$};
     \node[block,below =1cm of xragain](contract){contract: $\mathbf{x}_c$};
     \node[decision,right =0.7cm of contract](xc){is $\mathbf{x}_c$ better than $\mathbf{x}_{n+1}$};
     \node[cloud,right =0.7cm of xc](xn12xc){$\mathbf{x}_{n+1}\leftarrow \mathbf{x}_c$};
