@@ -31,7 +31,29 @@ void add_title(FILE *output_file, char* title)
 {
   fprintf(output_file,"\\section*{%s}\n",title);
 }
-  
+
+void open_triangle(FILE *output_file)
+{  
+  fputs("\\begin{tikzpicture}\n",output_file);
+}
+
+void append_triangle(FILE * output_file,double x[2],double y[2],double z[2],double scale)
+{
+
+  fprintf(output_file,"\\coordinate (x) at (%f,%f);\n",x[0]/scale,x[1]/scale);
+  fprintf(output_file,"\\coordinate (y) at (%f,%f);\n",y[0]/scale,y[1]/scale);
+  fprintf(output_file,"\\coordinate (z) at (%f,%f);\n",z[0]/scale,z[1]/scale);
+  fprintf(output_file,"\\draw (x) -- (y);\n");
+  fprintf(output_file,"\\draw (y) -- (z);\n");
+  fprintf(output_file,"\\draw (z) -- (x);\n");
+
+}
+
+void close_triangle(FILE *output_file)
+{
+ fprintf(output_file,"\\end{tikzpicture}\n");
+}
+
 void add_triangle(FILE *output_file,double x[2],double y[2],double z[2])
 {
   fputs("\\begin{tikzpicture}\n",output_file);

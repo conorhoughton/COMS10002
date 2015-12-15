@@ -10,7 +10,6 @@
 #include<stdio.h>
 #include<math.h>
 
-
 enum{DIM=2};
 
 #include "latex_triangles.c"
@@ -63,15 +62,15 @@ double goldstein_price(double x_v[DIM])
 int main()
 {
   double (*fxn)();
-  fxn=hyper_ellipsoid;
-  //fxn=rosenbrock;
+  //fxn=hyper_ellipsoid;
+  fxn=rosenbrock;
   //  fxn=goldstein_price;
 
   Point* points[DIM];
 
-  double x[DIM]={20,50};
+  double x[DIM]={20,30};
   double epsilon=0.5;
-
+  double scale=2.0;
   make_points(x,epsilon,fxn,points);
 
   int step_c,step_n=450;
@@ -89,9 +88,19 @@ int main()
   FILE * output_file;
   output_file=fopen("triangles.tex","w");
 
+  FILE * output_file_all;
+  output_file_all=fopen("all_triangles.tex","w");
+
+
   make_preamble(output_file);
-  //  add_title(output_file,"Rosenbrock");
-  add_title(output_file,"Hyper-ellipsoid");
+  make_preamble(output_file_all);
+  add_title(output_file,"Rosenbrock");
+  add_title(output_file_all,"Rosenbrock");
+  //add_title(output_file,"Hyper-ellipsoid");
+  //  add_title(output_file_all,"Hyper-ellipsoid");
+
+  open_triangle(output_file_all);
+
 
   for(step_c=0;step_c<step_n;step_c++)
     {
@@ -140,25 +149,21 @@ int main()
 	    }
 	  
 	}
-      /*
-      printf("\n");
-      print_point(points[0]);
-      print_point(points[1]);
-      print_point(points[2]);
-      printf("%c(%f)",move,best_value);	  
-      */
+
       int i;
       for(i=0;i<2;i++)
 	printf("%f ",((points[0]->x)[i]+(points[1]->x)[i]+(points[2]->x)[i])/3.0);
       printf("\n");
 
       add_centered_triangle(output_file,points[0]->x,points[1]->x,points[2]->x);
+      append_triangle(output_file_all,points[0]->x,points[1]->x,points[2]->x,scale);
 
 
     }
   printf("\n");
 
-  
+  close_triangle(output_file_all);
+  make_postamble(output_file_all);
   make_postamble(output_file);
 
   fclose(output_file);
