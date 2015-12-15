@@ -134,21 +134,6 @@ other words, it is often the quickest way to solve the problem if you
 include the researchers time along with the time it takes to run. It
 also does not require gradient information.
 
-A simplex is a generalization of a triangle, just as a triangle is
-defined in two-dimensional space and has three vertices and a
-tetrahedron is defined in three-dimensional space and have four
-vertices, a $n$-dimensional simplex has $n+1$-vertices. It is not
-regular, the distances between the vertices need not be the same, but
-there is required that it isn't flat: if you remove one vertex the
-remaining $n$ vertices are linearly independent.
-
-Now the idea of downhill simplex is that a simplex kind of ooches
-around looking for the minimum. It does this, roughly speaking, but
-taking the worst vertex, the one with the largest value of $E$, and
-replacing it with a better one. 
-
-
-
 
 \begin{figure}
 \begin{center}
@@ -162,10 +147,110 @@ at (2.5,4.33); \node[draw=red](x1n) at (x1) {$x_1$};
 \end{center}
 \caption{A simplex is a generalization of a triangle to higher numbers
   of dimensions, but here the 2-dimensional simplex is illustrated and
-  this is just a triangle. A simplex is not regular in general. In the
-  description of the downhill simplex algorithm the vertices is
-  ordered so $f(\mathbf{x}_1)\le f(\mathbf{x}_2)\le \ldots f(\mathbf{x}_{n+1})$.\label{fig:simplex}}
+  this is just a triangle. A simplex is not regular in general but in
+  many of these figures they are shown as regular to make things look
+  clearer. In the description of the downhill simplex algorithm the
+  vertices is ordered so $E(\mathbf{x}_1)\le E(\mathbf{x}_2)\le \ldots
+  E(\mathbf{x}_{n+1})$.\label{fig:simplex}}
 \end{figure}
+
+
+A simplex is a generalization of a triangle, just as a triangle is
+defined in two-dimensional space and has three vertices and a
+tetrahedron is defined in three-dimensional space and have four
+vertices, a $n$-dimensional simplex has $n+1$-vertices. It is not
+regular, the distances between the vertices need not be the same, but
+there is required that it isn't flat: if you remove one vertex the
+remaining $n$ vertices are linearly independent.
+
+Now the idea of downhill simplex is that a simplex kind of ooches
+around looking for the minimum. It does this, roughly speaking, by
+taking the worst vertex, the one with the largest value of $E$, and
+replacing it with a better one. There are a number of different
+operations that achieve this, which is used depends on the precise
+situation.
+
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}
+\coordinate (x1) at (0,0); 
+\coordinate (x2) at (5,2); 
+\coordinate (x3) at (0,5); 
+\coordinate (xo) at (2.5,1);
+\coordinate (xr) at (5,-3);
+\node[draw=red](x1n) at (x1) {$x_1$};
+\node[draw=red](x2n) at (x2) {$x_2$}; 
+\node[draw=red](x3n) at (x3) {$x_3$}; 
+\node[draw=red](xon) at (xo) {$x_o$}; 
+\node[draw=red](xrn) at (xr) {$x_r$}; 
+\draw (x1n) -- (xon); 
+\draw (xon) -- (x2n); 
+\draw (x2n) -- (x3n); 
+\draw (x3n) -- (x1n);
+\draw[dashed] (x1n) -- (xrn);
+\draw[dashed] (x2n) -- (xrn);
+\end{tikzpicture}
+
+\end{center}
+\caption{The reflected point is constructed by reflecting the point
+  with the worst value of the objective function through the centroid
+  of the other points.\label{fig:reflection}}
+\end{figure}
+
+
+For simplicity lets imagine the vertices are in order according to the
+objective function, so
+\begin{equation}
+E(\mathbf{x}_1)\le E(\mathbf{x}_2)\le \ldots \le E(\mathbf{x}_{n+1})
+\end{equation}
+The idea generally is to replace $\mathbf{x}_{n+1}$. It is useful to
+define the center of the remaining points:
+\begin{equation}
+\mathbf{x}_o=\frac{1}{n}\sum_{i=1}^n\mathbf{x}_i
+\end{equation}
+Now let $\mathbf{x}_r$ be the point you get to by reflecting
+$\mathbf{x}_{n+1}$ in the $n$-dimensional simplex formed by the
+remaining points is
+\begin{equation}
+\mathbf{x}_r=\mathbf{x}_o+(\mathbf{x}_o-\mathbf{x}_{n+1})
+\end{equation}
+Often this will be a sort of reasonable point so that if it replaced $\mathbf{x}_{n+1}$ it would not be the best nor the worst, so
+\begin{equation}
+E(\mathbf{x}_1)\le E(\mathbf{x}_r < E(\mathbf{x}_n)
+\end{equation}
+In this case use it to replace $\mathbf{x}_{n+1}$:
+\begin{equation}
+\mathbf{x}_{n+1}\leftarrow \mathbf{x}_r
+\end{equation}
+and then work out the new order of the points and repeat. This is called reflection and is shown in Fig.\ref{fig:reflection}.
+
+Reflection is the most common case, but there are others. For example,
+the reflected point $x_r$ might be better than any of the existing
+points, so
+\begin{equation}
+E(\mathbf{x}_r)<E(\mathbf{x}_1)
+\end{equation}
+in which case it is worth trying to go even further in the same direction by considering $\mathbf{x}_e$:
+\begin{equation}
+\mathbf{x}_e=\mathbf{x}_o+2(\mathbf{x}_o-\mathbf{x}_{n+1})
+\end{equation}
+If $E(\mathbf(x)_e<E(\mathbf(x)_r$ then
+\begin{equation}
+\mathbf{x}_{n+1}\leftarrow \mathbf{x}_e
+\end{equation}
+otherwise
+\begin{equation}
+\mathbf{x}_{n+1}\leftarrow \mathbf{x}_r
+\end{equation}
+as before. The expansion point is illustrated in
+Fig.~\ref{fig:refexp}. One advantage of expansion is that it makes the
+simplex bigger; since going from the reflection point to the expansion
+point gives an even lower value of the objective function it seems
+that where the simplex is the relevant features of the landscape are
+larger than the simplex. This is one advantage of the simplex
+approach, the size of the simplex changes to match scale of detail in
+the landscape.
 
 \begin{figure}
 \begin{center}
@@ -231,6 +316,41 @@ at (2.5,4.33); \node[draw=red](x1n) at (x1) {$x_1$};
   $\mathbf{x}_r$ and continues the same distance again in the same
   direction to give $\mathbf{x}_e$\label{fig:refexp} }
 \end{figure}
+
+Another possibility is that changing the worst point to the reflection
+point would not prevent it from being the worst point, so
+\begin{equation}
+E(\mathbf{x}_r)>E(\mathbf{x}_n)
+\end{equation}
+Replacing $x_{n+1}$ with $x_r$ in this situation would lead to
+wasteful repeative moves. It also implies that the simplex is too big,
+reflecting the worst point causes it to skip over a region where there
+are lower values of the objective function. As such a new point is defined, the contraction points
+\begin{equation}
+\mathbf{x}_c=\mathbf{x}_o-(\mathbf{x}_o-\mathbf{x}_{n+1})/2
+\end{equation}
+If $E(\mathbf{x}_c)<E(\mathbf{x}_{n+1})$ then
+\begin{equation}
+\mathbf{x}_{n+1}\leftarrow \mathbf{x}_c
+\end{equation}
+Finally, if this does not work, there is an emergency move called
+reduction which shrinks the whole simplex towards the best point. In
+this move all the points except $\mathbf{x}_1$ are replaced by the point half-way to $\mathbf{x}_1$
+\begin{equation}
+\mathbf{x}_i=(\mathbf{x}_i+\mathbf{x}_1)/2
+\end{equation}
+Reduction and contraction are both illustrated in
+Fig.~\ref{fig:conred} and a flow chart for the whole algorithm is
+given in Fig.~\ref{fig:flowchart}.
+
+Obviously after any of these moves the points are reorder and the
+algorithm repeats. However, practically, a stopping criterion needs to
+be devised. This usually says that the algorithm stops when the
+simplex vertices have values of the objective function that are
+extremely close to each other, where \lq{}extemely\rq{} represents
+some specified tolerance. Often a maximum number of iterations is also
+specified in case the algorithm doesn't converge.
+
 
 \begin{figure}
 \begin{center}
@@ -314,12 +434,12 @@ at (2.5,4.33); \node[draw=red](x1n) at (x1) {$x_1$};
     \node[decision, below of= reflect] (xr){is $\mathbf{x}_r$ the best point};
     \node[block, right=1cm of xr] (expand){expand: $\mathbf{x}_e$};
     \node[decision, right = 1cm of expand](xe){is $\mathbf{x}_e$ better than $\mathbf{x}_r$};
-    \node[cloud,above of=xe](xn12xe){$\mathbf{x}_{n+1}\rightarrow \mathbf{x}_e$};
-    \node[cloud,below of=xe](xn12xr){$\mathbf{x}_{n+1}\rightarrow \mathbf{x}_r$};
-    \node[decision,below of=xr](xragain){is $\mathbf{x}_r$ the worst};
+    \node[cloud,above of=xe](xn12xe){$\mathbf{x}_{n+1}\leftarrow \mathbf{x}_e$};
+    \node[cloud,below of=xe](xn12xr){$\mathbf{x}_{n+1}\leftarrow \mathbf{x}_r$};
+    \node[decision,below of=xr](xragain){is $E(\mathbf{x}_r)>E(\mathbf{x}_n)$};
     \node[block,below =1cm of xragain](contract){contract: $\mathbf{x}_c$};
     \node[decision,right =0.7cm of contract](xc){is $\mathbf{x}_c$ better than $\mathbf{x}_{n+1}$};
-    \node[cloud,right =0.7cm of xc](xn12xc){$\mathbf{x}_{n+1}\rightarrow \mathbf{x}_c$};
+    \node[cloud,right =0.7cm of xc](xn12xc){$\mathbf{x}_{n+1}\leftarrow \mathbf{x}_c$};
     \node[cloud,below of= xc](reduce){reduce};
 
     % Draw edges
@@ -350,5 +470,22 @@ at (2.5,4.33); \node[draw=red](x1n) at (x1) {$x_1$};
   repeats.\label{fig:flowchart}}
 \end{figure}
 
+The downhill simplex is a simple, intuitively appealling and robust
+algorithm. It is easy to code. It is often the thing that you try to
+see if you can avoid doing something cleverer and hence
+trickier. However, there are better algorithms, the best algorithms
+like this that don't use gradient information involve chosing a
+direction and optimization the objective function in that direction
+before chosing another direction and repeating; the details of the
+algorithms account for how the directions are chosen.
+
+The biggest problem is what happens when there is more than one
+minimum, where there is a absolute minimum you are looking for and
+local minima that act as a trap for the simplex. One approach to this
+is to set the simplex off from lots of different initial conditions in
+the hope that one of them will reach the absolute minimum. Another
+method is to use something like simulated annealling or the genetic
+algorithm, these are designed to work well when the answer is hiding
+behind lots of local minima.
 
 \end{document}
